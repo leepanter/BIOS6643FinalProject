@@ -1,0 +1,39 @@
+---
+title: "Comparing Correlated Data Models on Single-Cell RNA Expression Profiles"
+author: "Lee Panter"
+subtitle: "BIOS 6643 -- FALL 2019 -- Final Project"
+output: beamer_presentation
+bibliography: PresentBib.bib
+---
+
+```{r setup, cache=TRUE, echo=FALSE, eval=TRUE}
+knitr::opts_chunk$set(echo=FALSE, 
+                      cache = TRUE, 
+                      fig.align = "center",
+                      fig.width = 5)
+```
+
+## Presentation Overview
+
+\begin{itemize}
+\setlength{\itemsep}{1.2\baselineskip}
+\item Introduction to RNA and Single-Cell[\1em]
+\item Data Summaries, Examples, and Proposed Modeling Approaches
+\item Results, Comparisons, and Conclusions
+\item Future Research and Unadressed Problems
+\end{itemize}
+
+
+## RNA Expression Profiles and Single-Cell Methodologies
+
+
+
+
+## References
+\cite{centers2017new}
+
+\bibliography{BibdotBib}
+
+
+
+

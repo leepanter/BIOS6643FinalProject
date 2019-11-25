@@ -1,0 +1,571 @@
+---
+title: "Final Project"
+subtitle: "Phase 2 -- Progress Report"
+author: "Lee Panter"
+output: 
+  pdf_document:
+    df_print: kable
+    includes:
+      in_header: Rmarkdown_preamble.tex
+geometry: margin=0.5in
+fontsize: 11pt
+bibliography: BibdotBibPhase2.bib
+---
+
+<!------------------------------------------------------------------------------>
+<!--  ####  KNITR Setup & Script Information   #### -->
+<!------------------------------------------------------------------------------>
+
+<!--  ####  KNITR Specs   #### -->
+```{r setup, cache=TRUE, echo=FALSE, eval=TRUE}
+knitr::opts_chunk$set(echo=FALSE, 
+                      cache = TRUE, 
+                      fig.align = "center",
+                      fig.width = 5)
+```
+***
+
+
+
+\underline{\textbf{Preface}}
+
+\textit{Hi Matt and/or Harris!} 
+
+Sorry for the length of this submission.  I promise it was not my intention to submit something so long, but I did want to cover all of the Phase Two objectives.  There is probably A LOT that you can ignore in here, and probably some code (and code output) that you probably did not want to see. I'm very sorry to waste your time if this is the case.  If you want me to cut this document down, I am happy to try, but I feel like the entire process follows the "Description" fairly strictly.   
+
+Please let me know if this submission is unacceptable.  Thank you.
+
+
+***
+<!--  ####  Description   #### -->
+\begin{center}
+\LARGE{\underline{\textbf{Description}}}
+\end{center}
+
+This script/writeup entails Phase Two of the final project in BIOS 6643.  It contains:
+
+* Details about the finalized data, including:
+  * Variable definitions, and nomeclature
+  * Explanatory layouts
+  * Reduction measures for introductory analyses
+  * Exploratory data analyses (both graphical and numerical)
+    * Exploratory data analyses of "log-transformed" variables
+* Initial Modeling Methodologies, including:
+  * Theoretical modeling formats
+  * Essential modeling assumptions (outcome/predictor types)
+* Basic results from model fits
+  * Streamlined code outputs
+  * Small paragraph of explanation
+  * Probable next steps
+  
+
+<!--  ####  Script Dependencies   #### -->
+
+<!--  Packages -->  
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(gridExtra)
+library(ggplot2)
+library(gridExtra)
+library(lme4)
+library(plyr)
+library(nlme)
+library(Matrix)
+```
+<!--  Working Directory  -->       
+```{r, echo=FALSE}
+WD="/Users/lee/Documents/Lee/School/CU Denver/Fall 2019/BIOS 6643/FinalProject/FinalProject/Phase2"
+setwd(WD)
+```
+
+<!-- Data  &  Variables -->       
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+load("/Users/lee/Documents/Lee/School/CU Denver/Fall 2019/BIOS 6643/FinalProject/FinalProject/FinalData/FilteredMergedData/Rdata/alldatFilter.RData")
+load("/Users/lee/Documents/Lee/School/CU Denver/Fall 2019/BIOS 6643/FinalProject/FinalProject/FinalData/FilteredMergedData/Rdata/flowFilter.RData")
+load("/Users/lee/Documents/Lee/School/CU Denver/Fall 2019/BIOS 6643/FinalProject/FinalProject/FinalData/FilteredMergedData/Rdata/indseqFilter.RData")
+load("/Users/lee/Documents/Lee/School/CU Denver/Fall 2019/BIOS 6643/FinalProject/FinalProject/FinalData/FilteredMergedData/Rdata/mdataFilter.RData")
+load("/Users/lee/Documents/Lee/School/CU Denver/Fall 2019/BIOS 6643/FinalProject/FinalProject/FinalData/FilteredMergedData/Rdata/seqFilter.RData")
+```
+***
+<!------------------------------------------------------------------------------>
+
+
+<!------------------------------------------------------------------------------>
+<!-- Begin Script -->       
+<!------------------------------------------------------------------------------>
+
+# Final Data Information
+
+## Basic Data Format
+
+The data on which the following analyses are conducted can be best represented in "short format" after the definition of a couple noteable variable sets, and indices.  
+
+### Nomeclature and Variables
+
+We define the set of RNAseq (RNA sequencing) variables using:
+\begin{align*}
+\Omega_{SEQ} &= \left \{SEQ_{p}: \ p=1, \ldots, 38354    \right \}\\
+&= \left \{ SEQ_{1}=``A1BG-AS1", \ SEQ_{2}= ``A1CF", \ \ldots, \  SEQ_{38353}=``SNOZ5", \ SEQ_{38354}=``SNOSNR66"  \right \}
+\end{align*}
+In this manner, we may refference $SEQ_{3350} = ``AL445384.1"$. Note that $|\Omega_{SEQ}| = 38354$
+
+\vspace{10pt}
+
+We also define the set of Flow Cytometry variables using:
+\begin{align*}
+\Omega_{FLOW} &= \left \{ FLOW_{p}: \ p=1, \ldots, 19    \right \}\\
+&= \left \{ FLOW_{1}=``FSC.A", \ FLOW_{2}= ``FSC.W", \ \ldots, \  FLOW_{18}=``CD27", \ FLOW_{19}=``CD235a"  \right \}
+\end{align*}
+In this manner, we may refference $FLOW_{14} = ``CD31"$. Note that $|\Omega_{FLOW}| = 19$
+
+\vspace{10pt}
+
+and we define the set of MetaData variables using:
+\begin{align*}
+\Omega_{META} &= \left \{ META_{p}: \ p=1, \ldots, 14    \right \}\\
+&= \left \{ META_{1}=``measurement.name", \ \ldots, \ META_{14}=``Perc.Mt"  \right \}
+\end{align*}
+In this manner, we may refference $META_{8} = ``CD31"$. Note that $|\Omega_{META}| = 14$
+
+following with tradition we will be using $i = 1, \ldots, 15$ to symbolize subject, and $j=1,\ldots,n_{i}$ to symbolize the number of repeated measurements within subject $i$. 
+
+With these definitions the short-versions of the data become much more illuminating.
+
+### RNAseq Data
+
+The short-format data for the RNAseq data may be written as:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$i \downarrow \ p\rightarrow$& $\left( SEQ_{1}\right)_{ij}$ & $\cdots$ & $\left( SEQ_{38354}\right)_{ij}$\\
+\hline
+\hline
+i=1 & $\left( SEQ_{1}\right)_{11}$ & $\cdots$ & $\left( SEQ_{38354}\right)_{11}$\\
+ & \vdots & \vdots & \vdots \\ 
+i=1 & $\left( SEQ_{1}\right)_{1n_{1}}$ & $\cdots$ & $\left( SEQ_{38354}\right)_{1n_{1}}$\\
+\hline
+\vdots &  &  & \\ 
+\hline
+i=15 & $\left( SEQ_{1}\right)_{15 \ 1}$ & $\cdots$ & $\left( SEQ_{38354}\right)_{15 \ 1}$\\
+ & \vdots & \vdots & \vdots \\ 
+i=15 & $\left( SEQ_{1}\right)_{1 \ n_{15}}$ & $\cdots$ & $\left( SEQ_{38354}\right)_{1  \ n_{15}}$\\
+\hline
+\end{tabular}
+\end{center}
+
+### Flow Cytometry Data
+
+The short-format data for the Flow Cytometry data may be written as:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$i \downarrow \ p\rightarrow$& $\left( FLOW_{1}\right)_{ij}$ & $\cdots$ & $\left( FLOW_{19}\right)_{ij}$\\
+\hline
+\hline
+i=1 & $\left( FLOW_{1}\right)_{11}$ & $\cdots$ & $\left( FLOW_{19}\right)_{11}$\\
+ & \vdots & \vdots & \vdots \\ 
+i=1 & $\left( FLOW_{1}\right)_{1n_{1}}$ & $\cdots$ & $\left( FLOW_{19}\right)_{1n_{1}}$\\
+\hline
+\vdots &  &  & \\ 
+\hline
+i=15 & $\left( FLOW_{1}\right)_{15 \ 1}$ & $\cdots$ & $\left( FLOW_{19}\right)_{15 \ 1}$\\
+ & \vdots & \vdots & \vdots \\ 
+i=15 & $\left( FLOW_{1}\right)_{1 \ n_{15}}$ & $\cdots$ & $\left( FLOW_{19}\right)_{1  \ n_{15}}$\\
+\hline
+\end{tabular}
+\end{center}
+
+## Reduction Measures for Introductory Analyses
+
+For the purpose of introductory analyses the full data is reduced to a single predictor and single outcome variable for each of the Flow and RNAseq data frames. Specifically, we perform initial regression anlyses on the RNAseq variables: $SEQ_{35858}=``TNKS"$, and $SEQ_{6202}=``CD22"$. (a univariate Flow analysis will follow if time allows).
+
+
+### Quality Control Measure for Final Data
+
+It should be noted that the data used here, and for further analyses has previously passed Quality Control measures imposed from a combination of sources:
+
+* The data source (original research publication)   [@arazi2018immune]
+  * All qualifying cells must have between 1,000 and 5,000 detected genes (1,000 < nFeature < 5,000)
+* The Seurat tutorial for Quality Control [@SatijaLa58:online]
+  * All qualifying cells must be filtered according to a maximum percentage threshold of Mitochondrial DNA (threshold altered from recommended value specified)
+* Outside Industry Sources
+  * Setting DNA threshold to 60% is appropriate
+  * Subsetting to B-Cells only 
+
+
+## Exploratory Data Analysis
+
+### Quantitative Data Summaries
+
+We produce six number summaries of the data variables $TNKS$ and $CD22$
+
+\textbf{\underline{TNKS}}
+
+```{r, echo=FALSE}
+summary(seqFilter[35858,])
+```
+
+\textbf{\underline{CD22}}
+
+```{r, echo=FALSE}
+summary(seqFilter[6202,])
+```
+
+
+
+### Graphical Data Summaries
+
+We produce histograms of $TNKS$ and $CD22$, and a scatter plot of their relationship.
+
+```{r, echo=FALSE}
+index.tnks=which(rownames(seqFilter)=="TNKS")
+index.cd22=which(rownames(seqFilter)=="CD22")
+tnks=seqFilter[index.tnks,]
+cd22=seqFilter[index.cd22,]
+nFeature=mdataFilter$nFeature
+nCount=mdataFilter$nCount
+Perc.Mt=mdataFilter$Perc.Mt
+subject.no=mdataFilter$subject.no
+measurement=mdataFilter$measurement.name
+dat=data.frame(subject.no, measurement, Perc.Mt, nCount, nFeature, cd22, tnks)
+
+p1=ggplot(dat, aes(x=tnks,fill=subject.no, color=subject.no))+
+  geom_histogram(alpha=0.5, position = "dodge", binwidth = 30)+
+  theme(legend.position = "none")
+```
+
+```{r, fig.width=7, echo=FALSE}
+p2=ggplot(dat, aes(x=cd22,fill=subject.no, color=subject.no))+
+  geom_histogram(alpha=0.5, position = "dodge", binwidth = 30)+
+  theme(legend.position = "none")
+grid.arrange(p1, p2, nrow=1, ncol=2)
+```
+
+```{r, echo=FALSE}
+p3=ggplot(dat, aes(x=cd22, y=tnks, color=subject.no))+
+  geom_point(alpha=0.5)+
+  theme(legend.position = "right")
+p3
+```
+
+## Log-Transformed Variables
+
+Given the severity of the right skew in the variables displayed above, it would be wise to also perform a log-transformation as a prepatory action.  We also display these transformed variables:
+
+We produce six number summaries of the data variables $log(TNKS+1)$ and $log(CD22+1)$\\
+
+\textbf{\underline{log(TNKS+1)}}
+
+```{r, echo=FALSE}
+dat$logtnks=log(dat$tnks+1)
+dat$logcd22=log(dat$cd22+1)
+logtnks=dat$logtnks
+logcd22=dat$logcd22
+summary(logtnks)
+```
+
+\textbf{\underline{log(CD22+1)}}
+
+```{r, echo=FALSE}
+summary(logcd22)
+```
+
+
+
+### Graphical Data Summaries
+
+We produce histograms of $log(TNKS+1)$ and $log(CD22+1)$, and a scatter plot of their relationship.
+
+```{r, echo=FALSE}
+p1log=ggplot(dat, aes(x=logtnks, fill=subject.no, color=subject.no))+
+  geom_histogram(alpha=0.5, position = "dodge")+
+  theme(legend.position = "none")
+```
+
+
+```{r, fig.width=7, echo=FALSE}
+p2log=ggplot(dat, aes(x=logcd22, fill=subject.no, color=subject.no))+
+  geom_histogram(alpha=0.5, position = "dodge")+
+  theme(legend.position = "none")
+
+grid.arrange(p1log, p2log, nrow=1, ncol=2)
+```
+
+
+
+```{r, echo=FALSE}
+p3=ggplot(dat, aes(x=logcd22, y=logtnks, color=subject.no))+
+  geom_point(alpha=0.5)+
+  theme(legend.position = "right")
+p3
+```
+
+***
+
+# Initial Modeling Methodologies
+
+Due to the intrinsic "count" nature dictated by the ourcome variable of interest, the ultimate goal of this project is to compare the effect of models that meet experimental design at different levels.  
+
+Specifically, we look to take three approaches to modeling the Seqencing Variable $TNKS$:
+
+1. Brute Force: Linear Model-OLS, and Linear Mixed Effects (least-good fits)
+2. Some Finesse: Poisson Regression-no over-dispersion and quasilikelikelihood (better fits), also incorperating Random Effect methodologies if time permits
+3. Better Still: Zero-Inflated Poisson and Zero-inflated Negative Binomial (even better fit) 
+
+In all cases, it will be assumed that responses are independent between subjects AND within subjects.  This can be reasonably justified in the context of the experimental design considering the sampling technique.
+
+Please note that indices have been kept general in the notation below to allow for future, more general models that encompass more variables (should time allow). In the notation that follows we have 
+
+$$\left( Y_{p_{resp}^{seq}}\right)_{ij} = TNKS_{ij}$$
+and 
+
+$$\left(X_{p_{cov}^{seq}}\right)_{ij} = CD22_{ij}$$
+and models that incorperate the "flow" subscript are incorperated to allow for modeling Flow Cytometry data in a similar fashion. 
+
+
+
+## Brute Force Modeling Information 
+
+These models are NOT an attempt to optimize fit, accuracy or any metric.  They are going to be used for baseline comparison.
+
+The following mixed (incorperating both fixed and random effects will be evaluated)
+
+### Model 1: Linear Model with Fixed Effects (LMwFE)
+
+$$\left( Y_{p_{resp}^{seq}}\right)_{ij} = \beta_{0} + \beta_{1i} +  \beta_{2i}\left(X_{p_{cov}^{seq}}\right)_{ij}  + \epsilon_{ij} $$
+and 
+$$\left( Y_{p_{resp}^{flow}}\right)_{ij} = \beta_{0} + \beta_{1i} + \beta_{2i}\left(X_{p_{cov}^{flow}}\right)_{ij} + \epsilon_{ij} $$
+where 
+$$\epsilon_{ij} \sim N\left(\mathbf{0}, \sigma_{\epsilon}^{2} \mathbf{I}_{n_{i}}   \right) $$
+
+### Model 2: Linear Mixed Model with Random Effects (LMMwRE)
+
+$$\left( Y_{p_{resp}^{seq}}\right)_{ij} = \beta_{0} + \beta_{2i}\left(X_{p_{cov}^{seq}}\right)_{ij} + b_{0i} + b_{1i}\left(X_{p_{cov}^{seq}}\right)_{ij} + \epsilon_{ij} $$
+and 
+$$\left( Y_{p_{resp}^{flow}}\right)_{ij} = \beta_{0}  + \beta_{2i}\left(X_{p_{cov}^{flow}}\right)_{ij} + b_{0i} + b_{1i}\left(X_{p_{cov}^{flow}}\right)_{ij} + \epsilon_{ij} $$
+where 
+$$
+\mathbf{b} = 
+\begin{bmatrix}
+b_{0i} \\
+b_{1i} \\
+\end{bmatrix} 
+\sim N(\mathbf{0}, \mathbf{G})
+$$
+
+$$
+\mathbf{G}=
+\begin{bmatrix}
+\sigma_{b}^{2} & 0 \\
+0 & \sigma_{b}^{2} \\
+\end{bmatrix}
+$$
+$$\epsilon_{ij} \sim N\left(\mathbf{0}, \sigma_{\epsilon}^{2} \mathbf{I}_{n_{i}}   \right) $$
+
+
+## Minor Finnese Approaches
+
+We hypothesize these approaches to be an improvement over the "Brute Force" approaches, but do not expect these models to encapsulate the full extent of the data's mean or variational behavior.
+
+We intend to model the following Poisson Regression models:
+
+### Model 3: Poisson Regression without over-dispersion (POI)
+
+The three elements of the GzLM are given by:
+
+1. We assume that $TNKS \sim Poisson\left(\lambda \right)$ (Responses are distributed according to the Poisson exponential family)
+2. We use will use the linear predictor:
+$$\eta=\beta_{0} + \beta_{1}\left(X_{p_{cov}^{flow}}\right)$$
+3. The linear predictor ($\eta$) and the mean response ($\mu = E\left [ Y | X\right ]$) are related by the link function $g(x) = \log(x)$ according to the rule:
+$$\mu = g^{-1}\left(\eta\right) $$
+
+
+### Model 4: Quasi-likelihood Poisson Regression (POIql)
+
+The three elements of the GzLM are given by:
+
+1. We assume that $TNKS \approx Poisson(\lambda)$ with $\sigma^{2}= var\left(TNKS\right) =\phi \lambda$, i.e responses are "distributed" according to the quasi-distribiution Poisson eponential family.
+2. We use the linear predictor:
+$$\eta=\beta_{0} + \beta_{1}\left(X_{p_{cov}^{flow}}\right)$$
+3. The linear predictor ($\eta$) and the mean response ($\mu = E\left [ Y | X\right ]$) are related by the link function $g(x) = \log(x)$ according to the rule:
+$$\mu = g^{-1}\left(\eta\right) $$
+
+
+## Better-Still Models
+
+Our most optimally suited models under consideration are a class of Mixture Models called "Zero-Inflated" models.  These models are based on an underlying mixture of zeros and (in this case) a positive count outcome. 
+
+### Model 5: Zero-Inflated Poisson (ZIP)
+
+This may be thought of as: 
+
+>a regular random-event process, taking place in unit time, containing excess zero-count(s) [@Zeroinfl35:online ]
+
+and we may write this model as a mixture: 
+
+$$\mathbf{P}\left(y_{ij}=k\right) =
+\begin{cases}
+\mathbf{P}\left(y_{ij}=0\right)=p \\
+\mathbf{P}\left(y_{ij}=k\right)=\left(1-p \right) \frac{\lambda^{k}e^{-\lambda}}{k!} \\
+\end{cases}
+$$
+$$\forall k \in \mathbb{N}$$
+
+### Model 6: Zero-Inflated Negative Binomial (ZINB)
+
+This is simply an alteration of model 5, and will hypothetically only show neglible improvements unless the underlying distribution of non-zero data is distinctly non-poisson.
+
+$$\mathbf{P}\left(y_{ij}=k\right) =
+\begin{cases}
+\mathbf{P}\left(y_{ij}=0\right)=p \\
+\mathbf{P}\left(y_{ij}=k\right)=\left(1-p \right) 
+\begin{pmatrix}
+k+r-1 \\ 
+k
+\end{pmatrix}
+\left(1-\lambda \right)^{r}\lambda^{k}  \\
+\end{cases}
+$$
+
+***
+
+
+# Basic Results from Model Fits
+
+At this time, we (I) have only started to work on linear and linear mixed models.  Below you will see the code I have used to create these two models, some diagnostic tables (R summary tables), and three diagnostic plots of each model:
+
+* Model Plotted on Original Data
+* Residual vs Fitted Values
+* QQ Plots
+
+In each I will also describe if there are:
+
+1. Outstanding issues in model fit that need to be addressed
+2. Further considerations for model comparisons
+3. Next Steps (if applicable)
+
+
+## Model 1: Linear Model with Fixed Effect (LMwFE)
+
+```{r}
+LMwFE=lm(tnks~subject.no + subject.no:cd22, data=dat)
+LMwFEs=summary(LMwFE)
+LMwFEs
+
+coefIntercept=rep(6.88246, times=15)
+coefSlope=rep(-0.007810969, times=15)
+for(i in 2:15)
+{
+  coefIntercept[i]=coefIntercept[i]+coefficients(LMwFE)[i]
+  coefSlope[i]=coefSlope[i]+coefficients(LMwFE)[i+15]
+}
+
+plot(tnks~cd22, data=dat, main="Model v Orignal Data")
+for(i in 1:15)
+{
+  abline(a=coefIntercept[i], b=coefSlope[i], col=(20+i), lty=2, lwd=2)
+}
+
+fit=fitted.values(LMwFE)
+res=residuals(LMwFE)
+
+p=ggplot(dat, aes(x=fit, y=res, color=subject.no))+
+  geom_point()+
+  geom_hline(yintercept = 0)+
+  ggtitle("Fitted Vs Residual")+
+  xlab("Fitted Value")+
+  ylab("Residual Value")
+p
+
+
+q=ggplot(dat, aes(sample = res))+
+  stat_qq()+
+  stat_qq_line()
+q
+```
+
+1. This model will be used primarily a a comparison, and it is not really the main object of interest, but I would still like to know if I can incoperate the CD22 covariate into the model BY ITSELF, not in an interaction term with the subject.
+
+2. I think that it will be important to be able to look back at this model and draw a comparative statistic (AIC, BIC, LR) for model comparison.
+
+3. Next Step is further modeling
+
+
+## Model 2: Linear Mixed Model with Random Effect (LMMwRE)
+
+```{r, warning=FALSE, message=FALSE}
+LMMwRE=lmer(tnks~subject.no+cd22+(1+cd22|subject.no), dat)
+FixedEffects=fixef(LMMwRE)
+RandomEffects=ranef(LMMwRE)
+
+Intercept=rep(FixedEffects[1], times=15)
+Slope=c()
+
+for(i in 1:25){
+  Slope[i]=RandomEffects[["subject.no"]][["cd22"]][i]
+  Intercept[i]=Intercept[i]+RandomEffects[["subject.no"]][["(Intercept)"]][i]
+}
+
+for(i in 2:15)
+{
+  Intercept[i]=Intercept[i]+FixedEffects[i]
+}
+
+plot(tnks~cd22, data=dat, main="Model v Orignal Data")
+for(i in 1:15)
+{
+  abline(a=Intercept[i], b=Slope[i], col=(20+i), lty=2, lwd=2)
+}
+
+fit=fitted.values(LMMwRE)
+res=residuals(LMMwRE)
+
+p=ggplot(dat, aes(x=fit, y=res, color=subject.no))+
+  geom_point()+
+  geom_hline(yintercept = 0)+
+  ggtitle("Fitted Vs Residual")+
+  xlab("Fitted Value")+
+  ylab("Residual Value")
+p
+
+
+q=ggplot(dat, aes(sample = res))+
+  stat_qq()+
+  stat_qq_line()
+q
+
+```
+
+
+1. I'm not completely sure I have captured the data structure accurately in these models.  Specifically, I am wondering if the theoretical models match the R models. I am also interested in whether I have accurately represented the clustering of the data.
+
+2. Further considerations will be similar to that of the first model.  I think that it should also be considered whether or not to do further outlier removal for the purpose of this project for visualization purposes.
+
+3. Next step is to fit generalized linear models.  
+
+
+
+<!------------------------------------------------------------------------------>
+<!-- End Script -->       
+<!------------------------------------------------------------------------------>
+
+
+<!------------------------------------------------------------------------------>
+<!-- Post-Script -->       
+<!------------------------------------------------------------------------------>
+
+# References
+
+\bibliography{BibdotBibPhase1}
+
+<!-- Notes:        -->       
+
+<!-- Compilation Errors -->       
+
+<!-- Execution Errors -->
+
+<!-- Next Scripts to Consider -->
+
+<!------------------------------------------------------------------------------>
+

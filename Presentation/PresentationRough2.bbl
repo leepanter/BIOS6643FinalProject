@@ -1,0 +1,15 @@
+\begin{thebibliography}{1}
+
+\bibitem{maher2009transcriptome}
+Christopher~A Maher, Chandan Kumar-Sinha, Xuhong Cao, Shanker Kalyana-Sundaram,
+  Bo~Han, Xiaojun Jing, Lee Sam, Terrence Barrette, Nallasivam Palanisamy, and
+  Arul~M Chinnaiyan.
+\newblock Transcriptome sequencing to detect gene fusions in cancer.
+\newblock {\em Nature}, 458(7234):97, 2009.
+
+\bibitem{SatijaLa52:online}
+Satija lab.
+\newblock \url{https://satijalab.org/seurat/v3.1/pbmc3k_tutorial.html}.
+\newblock (Accessed on 11/24/2019).
+
+\end{thebibliography}

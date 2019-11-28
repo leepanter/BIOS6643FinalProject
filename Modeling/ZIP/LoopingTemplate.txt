@@ -1,0 +1,88 @@
+
+Intensity Models
+(I1) FE: fixed  = ~ 1
+     RE: random = ~ (1|subject)
+
+(I2) FE: fixed  = ~ 1
+     RE: random = ~ (1|subject) +(0+cd19|subject)
+
+(I3) FE: fixed  = ~ 1 + cd19
+     RE: random = ~ (1|subject)
+
+(I4) FE: fixed  = ~ 1 + cd19
+     RE: random = ~ (1|subject) + (0+cd19|subject)
+
+
+Occurence Models
+(O1) FE: zi_fixed  = ~ 1
+     RE: zi_random = NONE
+
+(O2) FE: zi_fixed  = ~ 1 + cd19
+     RE: zi_random = NONE
+
+(O3) FE: zi_fixed  = ~ 1
+     RE: zi_random = ~ (1|subject)
+
+(O4) FE: zi_fixed  = ~ 1
+     RE: zi_random = ~ (1|subject) + (0+cd19|subject)
+
+(O5) FE: zi_fixed  = ~ 1 + cd19
+     RE: zi_random = ~ (1|subject)
+
+(O6) FE: zi_fixed  = ~ 1 + cd19
+     RE: zi_random = ~ (1|subject) + (0+cd19|subject)
+
+
+
+####	OX + __	 ####
+
+#### I1
+lmod.ZIP.OX.I1=mixed_model(mala~1,
+                      random = ~1|subject,
+                      data=dat,
+                      family = zi.poisson(),
+                      zi_fixed = __**#**__,
+                      zi_random= __**#**__,
+                      max_coef_value=1000)
+(lmod.ZIP.OX.I1s=summary(lmod.ZIP.OX.I1))
+
+loglmod.ZIP.OX.I1=mixed_model(logmala~1,
+                      random = ~1|subject,
+                      data=logdat,
+                      family = zi.poisson(),
+                      zi_fixed = __**#**__,
+                      zi_random= __**#**__,
+                      max_coef_value=1000)
+(loglmod.ZIP.OX.I1s=summary(loglmod.ZIP.OX.I1))
+
+#### I2
+lmod.ZIP.OX.I2=update(lmod.ZIP.OX.I1, random= ~cd19|subject)
+(lmod.ZIP.OX.I2s=summary(lmod.ZIP.OX.I2))
+
+loglmod.ZIP.OX.I2=update(loglmod.ZIP.OX.I1, random= ~logcd19|subject)
+(loglmod.ZIP.OX.I2s=summary(loglmod.ZIP.OX.I2))
+
+#### I3
+lmod.ZIP.OX.I3=mixed_model(mala~cd19,
+                           random = ~1|subject,
+                           data=dat,
+                           family = zi.poisson(),
+                           zi_fixed = __**#**__,
+                           zi_random= __**#**__,
+                           max_coef_value=1000)
+(lmod.ZIP.OX.I3s=summary(lmod.ZIP.OX.I3))
+
+loglmod.ZIP.OX.I3=mixed_model(logmala~logcd19,
+                              random = ~1|subject,
+                              data=logdat,
+                              zi_fixed = __**#**__,
+                              zi_random= __**#**__,
+                              max_coef_value=1000)
+(loglmod.ZIP.OX.I3s=summary(loglmod.ZIP.OX.I3))
+
+#### I4
+lmod.ZIP.OX.I4=update(lmod.ZIP.OX.I1, random= ~cd19|subject)
+(lmod.ZIP.OX.I4s=summary(lmod.ZIP.OX.I2))
+
+loglmod.ZIP.OX.I4=update(loglmod.ZIP.OX.I3, random= ~logcd19|subject)
+(loglmod.ZIP.OX.I4s=summary(loglmod.ZIP.OX.I4))

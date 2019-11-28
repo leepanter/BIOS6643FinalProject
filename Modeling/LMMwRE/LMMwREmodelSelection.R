@@ -31,42 +31,24 @@ download.file(url.data, dat.csv.gz)
 dat=read.csv(gzfile("ProjDat.csv.gz"))
 source_url(url.models, sha_url(url.models))
 
-# source(file = "/Users/lee/Documents/Lee/School/CU Denver/Fall 2019/BIOS 6643/FinalProject/Modeling/ModelFunctions/ModelFunctions.R")
-
-# # Set Working Directory
-# WD="/Users/lee/Documents/Lee/School/CU Denver/Fall 2019/BIOS 6643/FinalProject"
-# setwd(WD)
-
-# # Data Dependencies:
-# dat=read.table(gzfile("/Users/lee/Documents/Lee/School/CU Denver/Fall 2019/BIOS 6643/FinalProject/Data/ProjDat.RData.gz"))
-
-
-
 #-------------------------------------------------------------------------#
 ####	Begin Script	 ####
 #-------------------------------------------------------------------------#
 
-####	Pre-processing	 ####
+set.seed(123)
 
-# Define Response, covariate, and class variables to be used throughout the script
+####	Pre-processing	 ####
 dat=dat[,-1]
 colnames(dat)=c("cd19", "mala", "subject")
-dat=dat[-1,]
 #dat$cd19=as.integer(levels(dat$cd19))[dat$cd19]
 #dat$mala=as.integer(levels(dat$mala))[dat$mala]
 dat$subject=as.factor(dat$subject)
-
-
+subject=dat$subject
 dat$malaOld=dat$mala
 dat$mala=dat$mala-67
-
-
 logcd19=log(dat$cd19+1, base = exp(1))
 logmala=log(dat$mala+1, base = exp(1))
-
-
 dat=groupedData(mala~cd19|subject, data = dat)
-
 logdat=data.frame(logmala, logcd19, subject)
 logdat=groupedData(logmala~logcd19|subject, data = logdat)
 
@@ -105,7 +87,7 @@ lmod.LMMeRE.3=lme4::lmer(mala~cd19+(1|subject),
 (lmod.LMMeRE.3s=summary(lmod.LMMeRE.3))
 (AIC.lmod.LMMeRE.3=AIC(lmod.LMMeRE.3))
 
-loglmod.LMMeRE.3=lme4::lmer(logmala~cd19+(1|subject),
+loglmod.LMMeRE.3=lme4::lmer(logmala~logcd19+(1|subject),
                             data=logdat)
 (loglmod.LMMeRE.3s=summary(loglmod.LMMeRE.3))
 (AIC.loglmod.LMMeRE.3=AIC(loglmod.LMMeRE.3))
@@ -116,7 +98,7 @@ lmod.LMMeRE.4=lme4::lmer(mala~cd19+(1|subject)+(0 + cd19 | subject),
 (lmod.LMMeRE.4s=summary(lmod.LMMeRE.4))
 (AIC.lmod.LMMeRE.4=AIC(lmod.LMMeRE.4))
 
-loglmod.LMMeRE.4=lme4::lmer(logmala~cd19+(1|subject)+(0 + logcd19 | subject),
+loglmod.LMMeRE.4=lme4::lmer(logmala~logcd19+(1|subject)+(0 + logcd19 | subject),
                             data=logdat)
 (loglmod.LMMeRE.4s=summary(loglmod.LMMeRE.4))
 (AIC.loglmod.LMMeRE.4=AIC(loglmod.LMMeRE.4))

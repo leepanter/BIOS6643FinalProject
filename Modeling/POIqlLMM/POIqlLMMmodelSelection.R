@@ -31,43 +31,24 @@ download.file(url.data, dat.csv.gz)
 dat=read.csv(gzfile("ProjDat.csv.gz"))
 source_url(url.models, sha_url(url.models))
 
-
-# source(file = "/Users/lee/Documents/Lee/School/CU Denver/Fall 2019/BIOS 6643/FinalProject/Modeling/ModelFunctions/ModelFunctions.R")
-
- # # Set Working Directory
-# WD="/Users/lee/Documents/Lee/School/CU Denver/Fall 2019/BIOS 6643/FinalProject"
-# setwd(WD)
-
-# # Data Dependencies:
-# dat=read.table(gzfile("/Users/lee/Documents/Lee/School/CU Denver/Fall 2019/BIOS 6643/FinalProject/Data/ProjDat.RData.gz"))
-
-
-
 #-------------------------------------------------------------------------#
 ####	Begin Script	 ####
 #-------------------------------------------------------------------------#
+
+set.seed(123)
 
 ####	Pre-processing	 ####
 
 # Define Response, covariate, and class variables to be used throughout the script
 dat=dat[,-1]
 colnames(dat)=c("cd19", "mala", "subject")
-dat=dat[-1,]
-#dat$cd19=as.integer(levels(dat$cd19))[dat$cd19]
-#dat$mala=as.integer(levels(dat$mala))[dat$mala]
 dat$subject=as.factor(dat$subject)
-
-
+subject=dat$subject
 dat$malaOld=dat$mala
 dat$mala=dat$mala-67
-
-
 logcd19=log(dat$cd19+1, base = exp(1))
 logmala=log(dat$mala+1, base = exp(1))
-
-
 dat=groupedData(mala~cd19|subject, data = dat)
-
 logdat=data.frame(logmala, logcd19, subject)
 logdat=groupedData(logmala~logcd19|subject, data = logdat)
 

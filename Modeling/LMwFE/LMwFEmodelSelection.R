@@ -32,21 +32,11 @@ dat=read.csv(gzfile("ProjDat.csv.gz"))
 source_url(url.models, sha_url(url.models))
 
 
-# source(file = "/Users/lee/Documents/Lee/School/CU Denver/Fall 2019/BIOS 6643/FinalProject/Modeling/ModelFunctions/ModelFunctions.R")
-#
-#
-# # Set Working Directory
-# WD="/Users/lee/Documents/Lee/School/CU Denver/Fall 2019/BIOS 6643/FinalProject"
-# setwd(WD)
-#
-# # Data Dependencies:
-# dat=read.table(gzfile("/Users/lee/Documents/Lee/School/CU Denver/Fall 2019/BIOS 6643/FinalProject/Data/ProjDat.RData.gz"))
-
-
-
 #-------------------------------------------------------------------------#
 ####	Begin Script	 ####
 #-------------------------------------------------------------------------#
+
+set.seed(123)
 
 ####	Pre-processing	 ####
 dat=dat[,-1]

@@ -54,7 +54,7 @@ colnames(dat)=c("cd19", "mala", "subject")
 #dat$cd19=as.integer(levels(dat$cd19))[dat$cd19]
 #dat$mala=as.integer(levels(dat$mala))[dat$mala]
 dat$subject=as.factor(dat$subject)
-
+subject=dat$subject
 
 dat$malaOld=dat$mala
 dat$mala=dat$mala-67
@@ -117,14 +117,14 @@ lmod.LMwFE.3=lm(mala~subject+cd19, data = dat)
 (AIC.lmod.LMwFE.3=AIC(lmod.LMwFE.3))
 anova(lmod.LMwFE.0,lmod.LMwFE.3)
 anova(lmod.LMwFE.2,lmod.LMwFE.3)
-#### Addition of subject and cov to lmod.LMwFE.0 NOT recommended (p=0.08813)
+#### Addition of subject and cov to lmod.LMwFE.0 recommended (p<2.2e-16)
 
-loglmod.LMwFE.3=lm(logmala~subject+cd19, data = logdat)
+loglmod.LMwFE.3=lm(logmala~subject+logcd19, data = logdat)
 (loglmod.LMwFE.3s=summary(loglmod.LMwFE.3))
 (AIC.loglmod.LMwFE.3=AIC(loglmod.LMwFE.3))
 anova(loglmod.LMwFE.0,loglmod.LMwFE.3)
 anova(loglmod.LMwFE.2,loglmod.LMwFE.3)
-#### Addition of cd19 to loglmod.LMwFE.2 NOT recommended (p0.3728)
+#### Addition of logcd19 to loglmod.LMwFE.2 recommended (p<2.2e-16)
 
 
 ####	AIC Comparisions	 ####
@@ -138,14 +138,14 @@ AIC.lmod.LMwFE.3 # lowest
 #### Transformed Models
 AIC.loglmod.LMwFE.0
 AIC.loglmod.LMwFE.1
-AIC.loglmod.LMwFE.2 # Lowest
-AIC.loglmod.LMwFE.3 # very close
+AIC.loglmod.LMwFE.2
+AIC.loglmod.LMwFE.3 # lowest
 
 
 ####	FINAL MODELS 	 ####
 
 lmod.LMwFE    = lm(mala~subject+cd19, data = dat)
-loglmod.LMwFE = lm(logmala~subject, data = logdat)
+loglmod.LMwFE = lm(logmala~subject + logcd19, data = logdat)
 
 
 #-------------------------------------------------------------------------#

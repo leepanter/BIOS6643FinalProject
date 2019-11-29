@@ -338,21 +338,174 @@ loglmod.ZIP.O5.I4=update(loglmod.ZIP.O5.I3, random= ~logcd19|subject)
 
 
 
+####	O6 + __	 ####
+
+#### I1 # NOTE: DID NOT CONVERGE
+# lmod.ZIP.O6.I1=mixed_model(mala~1,
+#                            random = ~1|subject,
+#                            data=dat,
+#                            family = zi.poisson(),
+#                            zi_fixed = ~ 1 + cd19,
+#                             zi_random = ~ 1|subject,
+#                             max_coef_value=1000)
+# lmod.ZIP.O6.I1=update(lmod.ZIP.O6.I1, zi_random = ~ cd19|subject)
+# (lmod.ZIP.O6.I1s=summary(lmod.ZIP.O6.I1))
+
+loglmod.ZIP.O6.I1=mixed_model(logmala~1,
+                              random = ~1|subject,
+                              data=logdat,
+                              family = zi.poisson(),
+                              zi_fixed = ~ 1 + logcd19,
+                                zi_random = ~ 1|subject,
+                                max_coef_value=1000)
+loglmod.ZIP.O6.I1=update(loglmod.ZIP.O6.I1, zi_random = ~ logcd19|subject)
+(loglmod.ZIP.O6.I1s=summary(loglmod.ZIP.O6.I1))
+
+#### I2
+# lmod.ZIP.O6.I2=update(lmod.ZIP.O6.I1, random= ~cd19|subject)
+# (lmod.ZIP.O6.I2s=summary(lmod.ZIP.O6.I2))
+
+loglmod.ZIP.O6.I2=update(loglmod.ZIP.O6.I1, random= ~logcd19|subject)
+(loglmod.ZIP.O6.I2s=summary(loglmod.ZIP.O6.I2))
+
+#### I3 # NOTE: DID NOT CONVERGE
+# lmod.ZIP.O6.I3=mixed_model(mala~cd19,
+#                            random = ~1|subject,
+#                            data=dat,
+#                            family = zi.poisson(),
+#                            zi_fixed = ~ 1 + cd19,
+#                              zi_random = ~ 1|subject,
+#                              max_coef_value=1000)
+# lmod.ZIP.O6.I3=update(lmod.ZIP.O6.I3, zi_random = ~ cd19|subject)
+# (lmod.ZIP.O6.I3s=summary(lmod.ZIP.O6.I3))
+
+loglmod.ZIP.O6.I3=mixed_model(logmala~logcd19,
+                              random = ~1|subject,
+                              data=logdat,
+                              family = zi.poisson(),
+                              zi_fixed = ~ 1 + logcd19,
+                              zi_random = ~ 1|subject,
+                              max_coef_value=1000)
+loglmod.ZIP.O6.I3=update(loglmod.ZIP.O6.I3, zi_random = ~ logcd19|subject)
+(loglmod.ZIP.O6.I3s=summary(loglmod.ZIP.O6.I3))
+
+#### I4
+# lmod.ZIP.O6.I4=update(lmod.ZIP.O6.I1, random= ~cd19|subject)
+# (lmod.ZIP.O6.I4s=summary(lmod.ZIP.O6.I2))
+
+loglmod.ZIP.O6.I4=update(loglmod.ZIP.O6.I3, random= ~logcd19|subject)
+(loglmod.ZIP.O6.I4s=summary(loglmod.ZIP.O6.I4))
+
+
+
 
 ####	Comparison of AIC Values	 ####
-AIC(lmod.ZIP.O1.I1)  ## 4253773
-AIC(lmod.ZIP.O1.I2)  ## 4197112
-AIC(lmod.ZIP.O1.I3)  ## 4238477
-AIC(lmod.ZIP.O1.I4)  ## 4179112    *
-AIC(lmod.ZIP.O2.I1)  ## 4253773
-AIC(lmod.ZIP.O2.I2)  ## 4179113    *
-AIC(lmod.ZIP.O2.I3)  ## 4238477
-AIC(lmod.ZIP.O2.I4)  ## 4179111    *
-AIC(lmod.ZIP.O3.I1)  ## 4253776
-AIC(lmod.ZIP.O3.I2)  ## 4179117    *
-AIC(lmod.ZIP.O3.I3)  ## 4238480
-AIC(lmod.ZIP.O3.I4)  ## 4179117    *
-AIC(lmod.ZIP.O4.I1)  ## 4253794
-AIC(lmod.ZIP.O4.I2)  ## 4179136    *
-AIC(lmod.ZIP.O4.I3)  ## 4238480
-AIC(lmod.ZIP.O4.I4)  ## 4179136    *
+
+AIClmodZIP=c()
+
+ AIClmodZIP[1]=AIC(lmod.ZIP.O1.I1)
+ AIClmodZIP[2]=AIC(lmod.ZIP.O1.I2)
+ AIClmodZIP[3]=AIC(lmod.ZIP.O1.I3)
+ AIClmodZIP[4]=AIC(lmod.ZIP.O1.I4)
+ AIClmodZIP[5]=AIC(lmod.ZIP.O2.I1)
+ AIClmodZIP[6]=AIC(lmod.ZIP.O2.I2)
+ AIClmodZIP[7]=AIC(lmod.ZIP.O2.I3)
+ AIClmodZIP[8]=AIC(lmod.ZIP.O2.I4)
+ AIClmodZIP[9]=AIC(lmod.ZIP.O3.I1)
+AIClmodZIP[10]=AIC(lmod.ZIP.O3.I2)
+AIClmodZIP[11]=AIC(lmod.ZIP.O3.I3)
+AIClmodZIP[12]=AIC(lmod.ZIP.O3.I4)
+AIClmodZIP[13]=AIC(lmod.ZIP.O4.I1)
+AIClmodZIP[14]=AIC(lmod.ZIP.O4.I2)
+AIClmodZIP[15]=AIC(lmod.ZIP.O4.I3)
+AIClmodZIP[16]=AIC(lmod.ZIP.O4.I4)
+AIClmodZIP[17]=AIC(lmod.ZIP.O5.I1)
+AIClmodZIP[18]=AIC(lmod.ZIP.O5.I2)
+AIClmodZIP[19]=AIC(lmod.ZIP.O5.I3)
+AIClmodZIP[20]=AIC(lmod.ZIP.O5.I4)
+AIClmodZIP[21]=AIC(lmod.ZIP.O6.I1)
+AIClmodZIP[22]=AIC(lmod.ZIP.O6.I2)
+AIClmodZIP[23]=AIC(lmod.ZIP.O6.I3)
+AIClmodZIP[24]=AIC(lmod.ZIP.O6.I4)
+
+AICloglmodZIP=c()
+
+ AICloglmodZIP[1]=AIC(loglmod.ZIP.O1.I1)
+ AICloglmodZIP[2]=AIC(loglmod.ZIP.O1.I2)
+ AICloglmodZIP[3]=AIC(loglmod.ZIP.O1.I3)
+ AICloglmodZIP[4]=AIC(loglmod.ZIP.O1.I4)
+ AICloglmodZIP[5]=AIC(loglmod.ZIP.O2.I1)
+ AICloglmodZIP[6]=AIC(loglmod.ZIP.O2.I2)
+ AICloglmodZIP[7]=AIC(loglmod.ZIP.O2.I3)
+ AICloglmodZIP[8]=AIC(loglmod.ZIP.O2.I4)
+ AICloglmodZIP[9]=AIC(loglmod.ZIP.O3.I1)
+AICloglmodZIP[10]=AIC(loglmod.ZIP.O3.I2)
+AICloglmodZIP[11]=AIC(loglmod.ZIP.O3.I3)
+AICloglmodZIP[12]=AIC(loglmod.ZIP.O3.I4)
+AICloglmodZIP[13]=AIC(loglmod.ZIP.O4.I1)
+AICloglmodZIP[14]=AIC(loglmod.ZIP.O4.I2)
+AICloglmodZIP[15]=AIC(loglmod.ZIP.O4.I3)
+AICloglmodZIP[16]=AIC(loglmod.ZIP.O4.I4)
+AICloglmodZIP[17]=AIC(loglmod.ZIP.O5.I1)
+AICloglmodZIP[18]=AIC(loglmod.ZIP.O5.I2)
+AICloglmodZIP[19]=AIC(loglmod.ZIP.O5.I3)
+AICloglmodZIP[20]=AIC(loglmod.ZIP.O5.I4)
+AICloglmodZIP[21]=AIC(loglmod.ZIP.O6.I1)
+AICloglmodZIP[22]=AIC(loglmod.ZIP.O6.I2)
+AICloglmodZIP[23]=AIC(loglmod.ZIP.O6.I3)
+AICloglmodZIP[24]=AIC(loglmod.ZIP.O6.I4)
+
+lmod=as.factor(c("lmod.ZIP.O1.I1",
+       "lmod.ZIP.O1.I2",
+       "lmod.ZIP.O1.I3",
+       "lmod.ZIP.O1.I4",
+       "lmod.ZIP.O2.I1",
+       "lmod.ZIP.O2.I2",
+       "lmod.ZIP.O2.I3",
+       "lmod.ZIP.O2.I4",
+       "lmod.ZIP.O3.I1",
+       "lmod.ZIP.O3.I2",
+       "lmod.ZIP.O3.I3",
+       "lmod.ZIP.O3.I4",
+       "lmod.ZIP.O4.I1",
+       "lmod.ZIP.O4.I2",
+       "lmod.ZIP.O4.I3",
+       "lmod.ZIP.O4.I4",
+       "lmod.ZIP.O5.I1",
+       "lmod.ZIP.O5.I2",
+       "lmod.ZIP.O5.I3",
+       "lmod.ZIP.O5.I4",
+       "lmod.ZIP.O6.I1",
+       "lmod.ZIP.O6.I2",
+       "lmod.ZIP.O6.I3",
+       "lmod.ZIP.O6.I4"))
+AIC.zip=data.frame(lmod, AIClmodZIP, AICloglmodZIP)
+
+which.min(AIC.zip$AIClmodZIP)
+# lmod.ZIP.O1.I2 and lmod.ZIP.O1.I4 have the same AIC, both of which are the lowest.
+
+which.min(AIC.zip$AICloglmodZIP)
+# loglmod.ZIP.O1.I3 has the lowest AIC for the log models
+
+
+####	lmod.ZIP.O1.I2 VS lmod.ZIP.O1.I4 ####
+anova(lmod.ZIP.O1.I2, lmod.ZIP.O1.I4)
+# We will choose lmod.ZIP.O1.I2 as it is the simpler model
+
+
+
+####	FINAL MODELS ####
+lmod.ZIP=mixed_model(mala~1,
+                     random = ~1|subject,
+                     data=dat,
+                     family = zi.poisson(),
+                     zi_fixed = ~ 1)
+lmod.ZIP=update(lmod.ZIP.O1.I1, random= ~cd19|subject)
+
+loglmod.ZIP=mixed_model(logmala~logcd19,
+                                         random = ~1|subject,
+                                         data=logdat,
+                                         family = zi.poisson(),
+                                         zi_fixed = ~ 1)
+
+

@@ -14,14 +14,12 @@ library(ggplot2)
 library(nlme)
 library(MASS)
 library(pscl)
+library(GLMMadaptive)
+
 
 # Set Working Directory
-WD="/Users/lee/Documents/Lee/School/CU Denver/Fall 2019/BIOS 6643/FinalProject"
-setwd(WD)
 
 # Data Dependencies:
-load("/Users/lee/Documents/Lee/School/CU Denver/Fall 2019/BIOS 6643/FinalProject/Data/seqFilter.RData")
-load("/Users/lee/Documents/Lee/School/CU Denver/Fall 2019/BIOS 6643/FinalProject/Data/mdataFilter.RData")
 
 # Variable Dependencies:
 
@@ -61,15 +59,20 @@ LMwFEmodelFit=function(resp, cov, subj)
   DatTemp=data.frame(resp, cov, subj)
   DatTemp=groupedData(resp~cov|subj, data = DatTemp)
 
+  LMwFE=lm(resp~subj+cov, data = DatTemp)
+  return(LMwFE)
+}
+
+logLMwFEmodelFit=function(resp, cov, subj)
+{
   logresp=log(resp+1, base = exp(1))
   logcov=log(cov+1, base = exp(1))
 
   logDatTemp=data.frame(logresp, logcov, subj)
   logDatTemp=groupedData(logresp~logcov|subj, data = logDatTemp)
 
-  LMwFE=lm(resp~cov, data = DatTemp)
-  logLMwFE=lm(logresp~logcov, data=logDatTemp)
-  return(list(LMwFE, logLMwFE))
+  logLMwFE=lm(logresp~subj, data=logDatTemp)
+  return(logLMwFE)
 }
 
 
@@ -115,17 +118,21 @@ LMMwREmodelFit=function(resp, cov, subj)
   DatTemp=data.frame(resp, cov, subj)
   DatTemp=groupedData(resp~cov|subj, data = DatTemp)
 
+  LMMwRE=lme4::lmer(resp~cov+(1|subj), data=DatTemp)
+  return(LMMwRE)
+}
+
+logLMMwREmodelFit=function(resp, cov, subj)
+{
   logresp=log(resp+1, base = exp(1))
   logcov=log(cov+1, base = exp(1))
 
   logDatTemp=data.frame(logresp, logcov, subj)
   logDatTemp=groupedData(logresp~logcov|subj, data = logDatTemp)
 
-  LMMwRE=lme4::lmer(resp~cov+(1|subj)+(0+cov|subj), data=DatTemp)
-  logLMMwRE=lme4::lmer(logresp~logcov+(1|subj)+(0+logcov|subj), data=logDatTemp)
-  return(list(LMMwRE,logLMMwRE))
+  logLMMwRE=lme4::lmer(logresp~1+(1|subj)+(0+logcov|subj), data=logDatTemp)
+  return(logLMMwRE)
 }
-
 
 ####	POI ####
 
@@ -159,17 +166,21 @@ POImodelFit=function(resp, cov, subj)
   DatTemp=data.frame(resp, cov, subj)
   DatTemp=groupedData(resp~cov|subj, data = DatTemp)
 
+  POI=glm(resp~subj+cov, family = poisson(link = "log"))
+  return(POI)
+}
+
+logPOImodelFit=function(resp, cov, subj)
+{
   logresp=log(resp+1, base = exp(1))
   logcov=log(cov+1, base = exp(1))
 
   logDatTemp=data.frame(logresp, logcov, subj)
   logDatTemp=groupedData(logresp~logcov|subj, data = logDatTemp)
 
-  POI=glm(resp~cov, family = poisson(link = "log"))
-  logPOI=glm(logresp~logcov, family = poisson(link = "log"))
-  return(list(POI,logPOI))
+  logPOI=glm(logresp~subj, family = poisson(link = "log"))
+  return(logPOI)
 }
-
 
 ####	POIql	 ####
 
@@ -204,16 +215,21 @@ POIqlmodelFit=function(resp, cov, subj)
   DatTemp=data.frame(resp, cov, subj)
   DatTemp=groupedData(resp~cov|subj, data = DatTemp)
 
+  POIql=glm(resp~subj+cov, family = quasipoisson(link = "log"), data=DatTemp)
+  return(POIql)
+}
+
+logPOIqlmodelFit=function(resp, cov, subj)
+{
   logresp=log(resp+1, base = exp(1))
   logcov=log(cov+1, base = exp(1))
 
   logDatTemp=data.frame(logresp, logcov, subj)
   logDatTemp=groupedData(logresp~logcov|subj, data = logDatTemp)
 
-  POIql=glm(resp~cov, family = quasipoisson(link = "log"), data=DatTemp)
-  logPOIql=glm(logresp~logcov, family = quasipoisson(link = "log"),
+  logPOIql=glm(logresp~subj+logcov, family = quasipoisson(link = "log"),
                data = logDatTemp)
-  return(list(POIql, logPOIql))
+  return(logPOIql)
 }
 
 
@@ -233,22 +249,29 @@ POIqlLMMmodelFit=function(resp, cov, subj)
   DatTemp=data.frame(resp, cov, subj)
   DatTemp=groupedData(resp~cov|subj, data = DatTemp)
 
+  POIqlLMM=glmmPQL(resp~cov,
+                   random=list(~1|subj, ~cov|subj),
+                   family = poisson,
+                   data=DatTemp)
+  return(POIqlLMM)
+}
+
+
+logPOIqlLMMmodelFit=function(resp, cov, subj)
+{
   logresp=log(resp+1, base = exp(1))
   logcov=log(cov+1, base = exp(1))
 
   logDatTemp=data.frame(logresp, logcov, subj)
   logDatTemp=groupedData(logresp~logcov|subj, data = logDatTemp)
 
-  POIqlLMM=glmmPQL(resp~cov,
-                   random=list(~1|subj, ~cov|subj),
-                   family = poisson,
-                   data=DatTemp)
   logPOIqlLMM=glmmPQL(logresp~cov,
-                   random=list(~1|subj, ~logcov|subj),
-                   family = poisson,
-                   data=logDatTemp)
-  return(list(POIqlLMM, logPOIqlLMM))
+                      random=list(~1|subj, ~logcov|subj),
+                      family = poisson,
+                      data=logDatTemp)
+  return(logPOIqlLMM)
 }
+
 
 
 
@@ -272,16 +295,46 @@ POIqlLMMmodelFit=function(resp, cov, subj)
 #   return(ZIP)
 # }
 
-ZIPmodelFit=function(resp, cov, subj)
+# ZIPmodelFit=function(resp, cov, subj)
+# {
+#   DatTemp=data.frame(resp, cov, subj)
+#   DatTemp=groupedData(resp~cov|subj, data = DatTemp)
+#
+#   ZIP=zeroinfl(formula=resp~cov|1,data=DatTemp)
+#   return(ZIP)
+# }
+
+ZIPmodelFit=function(resp, cov,subj)
 {
   DatTemp=data.frame(resp, cov, subj)
   DatTemp=groupedData(resp~cov|subj, data = DatTemp)
 
-  ZIP=zeroinfl(formula=resp~cov|1,data=DatTemp)
+  ZIP=mixed_model(resp~1,
+                       random = ~1|subj,
+                       data=DatTemp,
+                       family = zi.poisson(),
+                       zi_fixed = ~ 1)
+  ZIP=update(ZIP, random= ~cov|subj)
   return(ZIP)
 }
 
 
+logZIPmodelFit=functio(resp, cov,subj)
+{
+  logresp=log(resp+1, base = exp(1))
+  logcov=log(cov+1, base = exp(1))
+
+  logDatTemp=data.frame(logresp, logcov, subj)
+  logDatTemp=groupedData(logresp~logcov|subj, data = logDatTemp)
+
+  logZIP=mixed_model(logresp~logcov,
+                     random = ~1|subj,
+                     data=logDatTemp,
+                     family = zi.poisson(),
+                     zi_fixed = ~ 1)
+
+  return(logZIP)
+}
 #-------------------------------------------------------------------------#
 ####	End Script	 ####
 #-------------------------------------------------------------------------#

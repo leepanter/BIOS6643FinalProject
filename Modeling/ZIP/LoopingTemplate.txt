@@ -86,3 +86,15 @@ lmod.ZIP.OX.I4=update(lmod.ZIP.OX.I1, random= ~cd19|subject)
 
 loglmod.ZIP.OX.I4=update(loglmod.ZIP.OX.I3, random= ~logcd19|subject)
 (loglmod.ZIP.OX.I4s=summary(loglmod.ZIP.OX.I4))
+
+
+
+
+
+
+
+
+
+
+
+

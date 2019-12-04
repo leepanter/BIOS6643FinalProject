@@ -1,0 +1,172 @@
+---
+fontsize: 11pt
+output:
+  pdf_document:
+    df_print: kable
+    includes:
+      in_header: Rmarkdown_preamble.tex
+geometry: margin=0.5in
+bibliography: FinalProjBib.bib
+---
+
+<!------------------------------------------------------------------------------>
+<!--  ####  KNITR Setup & Script Information   #### -->
+<!------------------------------------------------------------------------------>
+
+<!--  ####  KNITR Specs   #### -->
+```{r setup, cache=TRUE, echo=FALSE, eval=TRUE}
+knitr::opts_chunk$set(echo=FALSE, 
+                      cache = TRUE, 
+                      fig.align = "center",
+                      fig.width = 5)
+```
+
+\newpage
+
+# Introduction
+
+The discovery of DNA, RNA, and the development of genomic sequencing methods has proven to be a valuable tool of scientific research.  However, the methods developed in the first-generation of technology relied on “bulk” sampling, which could only estimate population-average expression of RNA and DNA.  In order to obtain a more complete understanding of how the cellular landscape functions, estimates of cell-to-cell variability would need to be estimated.  Development of single-cell RNA sequencing (scRNAseq) technology has increased to satisfy this need, but a need for statistical analysis is still outstanding.  Previous methods used to model bulk RNA sequencing data do not account for the correlated nature of scRNAseq data.    
+
+This paper will compare six different modeling approaches on an observational scRNAseq data set obtained from a Lupus Nephritis Study of 33 patients across the United States.  Two RNA genes were selected to be the predictor-response pair to simplify the modeling process.  The main goal of this report is to investigate the ways in which parameter estimates vary as the modeling methodology is altered.  It is hoped that the results of this investigation are useful for the development of future models for scRNAseq data sets.
+
+# Data
+
+A single-cell RNA sequencing (scRNAseq) expression profile is a matrix of count-values representing a “snapshot” of the magnitude of activity of genomic features of a single cell.  [@Geneexpr23:online] In its original form, the data being studied here had a data matrix that contained 9,560 single-cell observations clustered within 27 samples (5 control not included in data).  Each observation contained the expression of 38,354 genetic features.  
+
+Single-Cell data is often unreliable, protocol dependent, and can often have batch effects.  Data quality control (QC) filters out redundant measures, and dead cell observations.  The Seurat guided tutorial [@satija2018seurat] was used to perform quality control, filtering out observations with: 
+\begin{itemize}
+  \item Percent Mitochondrial DNA > 60\%
+  \item Genetic Features Expressed < 1,000
+  \item Genetic Features Expressed > 5,000
+  \item B-cells only
+\end{itemize}
+
+These quality control measures reduced the original data by 88%, leaving only 1,110 observations clustered within 15 samples. Two genes (MALAT1 and CD19) were then selected from the set of genetic features in the initial data to be studied due to a higher correlation.  MALA1 has been consistently linked with cancer metastasis, cell migration, and cell regulation. [@MALAT1Ge80:online] CD19 encodes a cell surface molecule which regulates lymphocyte proliferation and differentiation.  [@CD19Gene32:online]. 
+
+Histograms and a joint distribution scatter plot were constructed to visualize the distributions of the selected variables (Appendix: Fig1-Fig3).  The presence of zeros in the data indicated that the distribution might be well suited for a zero-inflated mixture model.  Specifically, since the response was count-valued, the histograms indicated that a zero-inflated Poisson Generalized Linear Model or Generalized Linear Mixed Model would be appropriate.  Additionally, while normality was not expected, log-transformations were also applied (Appendix: fig4-fig6), and resulted in approximate normality of the response MALAT1 and a bimodal distribution of the predictor CD19.  
+
+# Methods
+
+The six different modeling methodologies explored in this investigation are: Linear Models with Fixed Effects (LMwFE), Linear Mixed Models with Random Effects (LMMwRE), Poisson Generalized Linear Models without overdispersion (POI), Poisson quasi-likelihood Generalized Linear Models with over dispersion (POIql), Poisson Generalized Linear Mixed Models with over-dispersion (POILMM), and Zero-Inflated Poisson Generalized Linear Mixed Models (ZIP).  Models are fit on non-transformed data.
+
+We assume that repeated measure residual errors are independent, i.e for subject $i = 1, \ldots, 15$ and repeated measure $j = 1. \ldots, n_{i}$
+$$\epsilon_{ij} \sim N(0, \sigma_{\epsilon}^{2})$$
+In an attempt to gain insight into the processes governing cellular relationships with their host subjects, a subject parameter was also fit using either a fixed or a random effect.  
+
+$$Fixed \ Effect: \quad \beta_{0i}$$
+$$Random \ Effect: \quad b_{0i}$$
+where:
+$$b_{0i}\sim N(0, \sigma_{b}^{2})$$
+An intercept and a covariate parameter are included in all models, these parameter estimates will be the primary focus for comparing the modeling methods.
+$$\gamma_{ij}=\beta_{0}+\beta_{1} \ CD19$$
+Unless otherwise stated, the canonical link function will be used:
+$$\mu_{ij}=g^{-1}(\eta_{ij})=log(\eta_{ij})$$
+Zero-Inflated models will use a fixed effect intensity model with only an intercept
+$$R_{ij} \sim bernoulli(p_{ij}| \alpha_{0i}) \quad p(R_{ij}=1)=\alpha_{0i}$$
+And we will allow the intensity model parameters to vary across the subject parameter.  This terminology allows the models to be written as: 
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.75\textwidth]{2019-12-04_06-47-08.jpeg}
+\end{figure}
+
+We note that there are four “NA” spots at which the model is either redundant (as in the case of LMwFE=LMMwRE with only fixed effects) or not possible to fit (cannot incorporate random effects).  After these eliminations, there are a total of 7 models being estimated.
+
+# Results
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{2019-12-04_06-52-15.jpeg}
+\end{figure}
+
+# Discussion
+
+Upon noting that:
+$$6.7750*10^{3} \approx e^{8.821} \leq \hat{\beta}_{0LMwFE},\hat{\beta}_{0LMMwRE} \leq e^{8.958} \approx 7769$$
+We see that changes in modeling strategy have little impact on the magnitude of the intercept estimate.  In fact, all intercept estimates agreed in sign, and magnitude.  The increase in p-value for intercept estimates from “POILMM-Random Subject” and “ZIP-Random Subject” are also associated with a corresponding drop in standard error and can therefore be attributed to improved model precision.
+
+These statements are not true for covariate parameter estimates.  While these parameters are comparable within similar model frameworks, the estimates agree on only sign across all models. This is not an unexpected result, since parameter estimates for slopes are heavily dependent on how observations are corelated, and this concept is approached differently in all of the models employed.
+
+The following matrices of values represent the percent changes for the intercept and slope estimates as the model is changed:
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.75\textwidth]{2019-12-04_05-08-06.jpeg}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.75\textwidth]{2019-12-04_05-25-17.jpeg}
+\end{figure}
+
+The model intercept exhibits stability, while the covariate estimate does not.
+
+
+# Limitations and Future Research
+
+Initial quality control measures for the scRNAseq data found an extremely high presence of mitochondrial RNA (mRNA).  Mitochondrial functionality is essential to cellular processeses, upon death such functions cease, and mitochondria degrade.  As a result, mRNA content is used as a quality control measure to indicate progression of cellular death.  The Seurat tutorial for single-cell analysis recommended filter parameters of \%mRNA  < \%5; however this threshold elimated all data when used in conjunction with the other recommended quality control measures.  A final determination of %mRNA < %60 was used to preserve as much of the clustering-structure as possible, with the trade-off of analyzing dead cells.  
+
+The results of this investigation are based upon mostly non-living biological samples.  While interpretation of model parameters is certainly possible, the individual estimates are less meaningful considering the contex than the estimate trends that we are seeking. 
+
+The analysis conducted in this investigation is inadequate and inaccurate.  The results are inaccurate because comparisons made in this investigation were not made carefully.  Neither controll models or nested modeling techniques have been used to compare parameter changes.  In order to fix this, the base model (in the case of this analysis-LMwFE) needs to incorperate BOTH fixed effects and random effects.  Additionally, a parameter needs to be defined for both fixed and random effects (separate variables) which can be used to compare the effects of added variables. The results of this investigation are inadequate because the original goal of the investigation was to investigate models over single-cell data and isolate the specific effects that the specified modeling strategies have over parameter estimates.  Since only a vauge conlcusion regarding slope and intercept was obtained, this investigation has fallen short of its objective.  
+
+Consequently, the future of research for this project is very broad in scope.  Immediate considerations will be made to compare more simplistic modeling strategies over more similar models.  
+
+
+
+\newpage
+
+# Code
+
+Please Visit:  https://github.com/leepanter/BIOS6643FinalProject to view code.  
+There are multiple scripts, and this repository will allow for easy downloading of the code.  There is a ReadMe on the Homepage.  Please let me know if you have any questions.
+
+
+# References
+
+\bibliography{FinalProjBib.bib}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!------------------------------------------------------------------------------>
+<!-- End Script -->       
+<!------------------------------------------------------------------------------>
+
+
+<!------------------------------------------------------------------------------>
+<!-- Post-Script -->       
+<!------------------------------------------------------------------------------>
+
+<!-- Notes:        -->       
+
+<!-- Compilation Errors -->       
+
+<!-- Execution Errors -->
+
+<!-- Next Scripts to Consider -->
+
+<!------------------------------------------------------------------------------>
+

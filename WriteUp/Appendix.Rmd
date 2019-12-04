@@ -1,0 +1,109 @@
+---
+title: "Appendix"
+fontsize: 11pt
+output:
+  pdf_document:
+    df_print: kable
+    includes:
+      in_header: Rmarkdown_preamble.tex
+geometry: margin=0.5in
+---
+
+<!------------------------------------------------------------------------------>
+<!--  ####  KNITR Setup & Script Information   #### -->
+<!------------------------------------------------------------------------------>
+
+<!--  ####  KNITR Specs   #### -->
+```{r setup, cache=TRUE, echo=FALSE, eval=TRUE}
+knitr::opts_chunk$set(echo=FALSE, 
+                      cache = TRUE, 
+                      fig.align = "center",
+                      fig.width = 2.5,
+                      fig.height = 2.5)
+```
+***
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(ggplot2)
+load("/Users/lee/Documents/Lee/School/CU Denver/MS_Project/Data:Scripts/FinalData/FilteredMergedData/Rdata/seqFilter.RData")
+load("/Users/lee/Documents/Lee/School/CU Denver/MS_Project/Data:Scripts/FinalData/FilteredMergedData/Rdata/mdataFilter.RData")
+```
+
+
+
+
+# Initial Variable Summary Plots
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+seqFilter=data.frame(t(seqFilter))
+dat=data.frame(seqFilter$CD19, seqFilter$MALAT1, mdataFilter$subject.no)
+
+colnames(dat)=c("cd19", "mala", "subject.no")
+
+p1=ggplot(dat, aes(x=cd19,fill=subject.no, color=subject.no))+
+  geom_histogram(alpha=0.5, position = "dodge", binwidth = 1)+
+  theme(legend.position = "right")
+
+
+p2=ggplot(dat, aes(x=mala,fill=subject.no, color=subject.no))+
+  geom_histogram(alpha=0.5, position = "dodge", binwidth = 1)+
+  theme(legend.position = "right")
+
+p3=ggplot(dat, aes(x=cd19, y=mala, color=subject.no))+
+  geom_point(alpha=0.5)
+```
+
+## Figure 1: CD19 Histogram
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+p1
+```
+
+## Figure 2: MALAT1 Histogram
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+p2
+```
+
+## Figure 3: MALAT1 vs CD19 Scatter Plot
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+p3
+```
+
+
+# Log Transformed Variables
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+dat=data.frame(log(seqFilter$CD19+1 ,base = exp(1)), 
+                  log(seqFilter$MALAT1+1 ,base = exp(1)), 
+                  mdataFilter$subject.no)
+
+colnames(dat)=c("cd19", "mala", "subject.no")
+
+p1=ggplot(dat, aes(x=cd19,fill=subject.no, color=subject.no))+
+  geom_histogram(alpha=0.5, position = "dodge", binwidth = 30)+
+  theme(legend.position = "right")
+
+
+p2=ggplot(dat, aes(x=mala,fill=subject.no, color=subject.no))+
+  geom_histogram(alpha=0.5, position = "dodge", binwidth = 30)+
+  theme(legend.position = "right")
+
+p3=ggplot(dat, aes(x=cd19, y=mala, color=subject.no))+
+  geom_point(alpha=0.5)
+```
+
+## Figure 4: CD19 Histogram
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+p1
+```
+
+## Figure 5: MALAT1 Histogram
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+p2
+```
+
+## Figure 6: MALAT1 vs CD19 Scatter Plot
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+p3
+```
+
+ Linear Predictor
+ 
+ $$\eta_{ij}= \beta_{0} + \beta_{1} \ CD19$$

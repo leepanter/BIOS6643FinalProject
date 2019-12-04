@@ -1,0 +1,86 @@
+---
+title: "Comparing Models for Single-Cell RNA Sequencing Data"
+author: "Lee Panter"
+fontsize: 11pt
+output:
+  word_document: default
+  pdf_document:
+    df_print: kable
+    includes:
+      in_header: Rmarkdown_preamble.tex
+geometry: margin=0.5in
+subtitle: BIOS 6643 -- FALl 2019 -- Final Project
+bibliography: FinalProjBib.bib
+---
+
+<!------------------------------------------------------------------------------>
+<!--  ####  KNITR Setup & Script Information   #### -->
+<!------------------------------------------------------------------------------>
+
+<!--  ####  KNITR Specs   #### -->
+```{r setup, cache=TRUE, echo=FALSE, eval=TRUE}
+knitr::opts_chunk$set(echo=FALSE, 
+                      cache = TRUE, 
+                      fig.align = "center",
+                      fig.width = 5)
+```
+
+\newpage
+
+# Introduction
+
+The discovery of DNA and RNA and, more importantly, the development of genomic sequencing methods has proven to be a valuable tool of scientific research.  However, the methods developed in the first-generation of technology relied on “bulk” sampling, which could only estimate population-average expression of RNA and DNA.  In order to obtain a more complete understanding of how the cellular landscape functions, estimates of cell-to-cell variability would need to be estimated.  Development of single-cell RNA sequencing (scRNAseq) technology has increased to satisfy this need, but a need for statistical analysis is still outstanding.  Previous methods used to model bulk RNA sequencing data do not account for the correlated nature of scRNAseq data.    
+
+This paper will compare six different modeling approaches on an observational scRNAseq data set obtained from a Lupus Nephritis Study of 33 patients across the United States.  Two RNA genes were selected to be the predictor-response pair to simplify the modeling process.  The main goal of this report is to investigate the ways in which parameter estimates vary as modeling methodology is altered.  It is hoped that the results of this investigation are useful for the development of future models for scRNAseq data sets.
+
+# Data
+
+A single-cell RNA sequencing (scRNAseq) expression profile is a matrix of count-values representing a time and space “snapshot” of the magnitude of activity of genomic features of a single cell.  [@Geneexpr23:online] In its original form, the data matrix contained 9,560 single-cell observations clustered within 27 samples (5 control not included in data).  Each observation contained the expression of 38,354 genetic features.  Single-Cell data is often unreliable, protocol dependent, and can often have batch effects.  Data quality control (QC) filters out redundant measures, and dead cell observations.  The Seurat guided tutorial [@satija2018seurat] was used to perform quality control, filtering out observations with: 
+\begin{itemize}
+  \item Percent Mitochondrial DNA > 60\%
+  \item Genetic Features Expressed < 1,000
+  \item Genetic Features Expressed > 5,000
+  \item B-cells only
+\end{itemize}
+
+These quality control measures reduced the original data by 88%, leaving only 1,110 observations clustered within 15 samples. Two genes (MALAT1 and CD19) were then selected from the set of genetic features in the initial data to be studied due to a higher magnitude of correlation.  MALA1 has been consistently linked with cancer metastasis, cell migration, and cell regulation. [@MALAT1Ge80:online] CD19 encodes a cell surface molecule which regulates lymphocyte proliferation and differentiation.  [CD19Gene32:online]. 
+
+Histograms and a joint distribution scatter plot was constructed to visualize the distributions of the selected variables (Appendix: Fig1-Fig3).  The presence of zeros in the data indicated that the distribution might be well suited for a zero-inflated mixture model.  Specifically, since the response was count-valued, the histograms indicated that a zero-inflated Poisson Generalized Linear Model or Generalized Linear Mixed Model would be appropriate.  Additionally, while normality was not expected, log-transformations were also applied (Appendix: fig4-fig6), and resulted in approximate normality of the response MALAT1 and a bimodal distribution of the predictor CD19.  
+
+# Methods
+
+The six different modeling methodologies explored in this investigation are: Linear Models with Fixed Effects (LMwFE), Linear Mixed Models w Random Effects (LMMwRE), Poisson Generalized Linear Models without overdispersion (POI), Poisson quasi-likelihood Generalized Linear Models with over dispersion (POIql), Poisson Generalized Linear Mixed Models with over-dispersion (POILMM), and Zero-Inflated Poisson Generalized Linear Mixed Models (ZIP).  Models are fit on non-transformed data.
+We assume that repeated measure residual errors are independent:
+
+
+
+
+
+
+
+# References
+
+\bibliography{FinalProjBib.bib}
+
+
+
+
+<!------------------------------------------------------------------------------>
+<!-- End Script -->       
+<!------------------------------------------------------------------------------>
+
+
+<!------------------------------------------------------------------------------>
+<!-- Post-Script -->       
+<!------------------------------------------------------------------------------>
+
+<!-- Notes:        -->       
+
+<!-- Compilation Errors -->       
+
+<!-- Execution Errors -->
+
+<!-- Next Scripts to Consider -->
+
+<!------------------------------------------------------------------------------>
+

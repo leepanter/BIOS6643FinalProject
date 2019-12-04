@@ -1,0 +1,37 @@
+---
+title: "Scratch"
+author: "Lee Panter"
+date: "12/4/2019"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+intercept=c(8.8927, 8.9001, 8.821, 8.9570, 8.8362, 8.9580,8.9402 )
+
+intercept2=c(2.562, 2.495 ,3.246*10^(-4), 8.839*10^(-5),3.16*10^(-4) , 8.559*10^(-5), 2.9282*10^(-4))
+
+perc=function(a, b){
+  out=(a-b)/a
+  return(out)
+}
+
+perc.vec=function(vec){
+  l=length(vec)
+  m=matrix(NA, nrow = l, ncol = l)
+  for(i in 1:l){
+    for(j in 1:l)
+    {
+      m[i,j]=perc(vec[i], vec[j])
+    }
+  }
+  return(m)
+}
+
+inter=perc.vec(intercept2)
+inter=as.matrix(round(inter, 4))
+inter
+```

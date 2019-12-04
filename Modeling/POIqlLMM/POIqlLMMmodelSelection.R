@@ -121,3 +121,13 @@ g=ggplot(df.lmod.POIqlLMM.0, aes(x=xrange))+
   geom_point(aes(y=yobs), color="red")+
   geom_line(aes(y=ypred.lmod.POIqlLMM.0))
 g
+
+
+testlmod.POIqlLMM.2=glmer(mala~subject+cd19,
+                        family = poisson,
+                        data=dat)
+(lmod.POIqlLMM.2s=summary(lmod.POIqlLMM.2))
+
+
+
+

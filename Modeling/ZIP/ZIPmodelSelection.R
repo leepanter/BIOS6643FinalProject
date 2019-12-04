@@ -71,6 +71,10 @@ logdat=groupedData(logmala~logcd19|subject, data = logdat)
 
 ####	O1 + __	 ####
 
+#### I0
+lmod.ZIP.O1.I0=zeroinfl(mala~cd19|1,data=dat)
+(lmod.ZIP.O1.I0s=summary(lmod.ZIP.O1.I0))
+
 #### I1
 lmod.ZIP.O1.I1=mixed_model(mala~1,
                       random = ~1|subject,

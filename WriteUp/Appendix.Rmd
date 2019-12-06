@@ -40,12 +40,12 @@ dat=data.frame(seqFilter$CD19, seqFilter$MALAT1, mdataFilter$subject.no)
 colnames(dat)=c("cd19", "mala", "subject.no")
 
 p1=ggplot(dat, aes(x=cd19,fill=subject.no, color=subject.no))+
-  geom_histogram(alpha=0.5, position = "dodge", binwidth = 1)+
+  geom_histogram(alpha=0.5, position = "dodge", binwidth = 5)+
   theme(legend.position = "right")
 
 
 p2=ggplot(dat, aes(x=mala,fill=subject.no, color=subject.no))+
-  geom_histogram(alpha=0.5, position = "dodge", binwidth = 1)+
+  geom_histogram(alpha=0.5, position = "dodge", binwidth = 5)+
   theme(legend.position = "right")
 
 p3=ggplot(dat, aes(x=cd19, y=mala, color=subject.no))+

@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  6 DEC 2019 01:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  6 DEC 2019 19:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**WriteUp.tex
-(./WriteUp.tex
+**FinalWriteUp.tex
+(./FinalWriteUp.tex
 LaTeX2e <2018-04-01> patch level 2
 Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
 (/usr/local/texlive/2018/texmf-dist/tex/latex/base/article.cls
@@ -448,7 +448,33 @@ Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
 Package hyperref Info: Option `breaklinks' set `true' on input line 28.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2016/07/10 v1.1e Standard LaTeX Color (DPC)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 147.
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+)) (/usr/local/texlive/2018/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2008/02/07
+
+Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
+<2008/02/07> (tvz)
+\FV@CodeLineNo=\count115
+\FV@InFile=\read1
+\FV@TabBox=\box28
+\c@FancyVerbLine=\count116
+\FV@StepNumber=\count117
+\FV@OutFile=\write3
+) (/usr/local/texlive/2018/texmf-dist/tex/latex/framed/framed.sty
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip48
+\fb@frw=\dimen125
+\fb@frh=\dimen126
+\FrameRule=\dimen127
+\FrameSep=\dimen128
+) (/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
 (/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
@@ -458,11 +484,9 @@ Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 99.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics-def/pdftex.def
-File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
-))
-\Gin@req@height=\dimen125
-\Gin@req@width=\dimen126
+)
+\Gin@req@height=\dimen129
+\Gin@req@width=\dimen130
 ) (/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/grffile.sty
 Package: grffile 2017/06/30 v1.18 Extended file name support for graphics (HO)
 Package grffile Info: Option `multidot' is set to `true'.
@@ -473,35 +497,29 @@ Package grffile Info: \Gin@ii of package `graphicx' fixed on input line 494.
 Package: parskip 2001/04/09 non-zero parskip adjustments
 ) (/usr/local/texlive/2018/texmf-dist/tex/latex/titling/titling.sty
 Package: titling 2009/09/04 v2.1d maketitle typesetting
-\thanksmarkwidth=\skip48
-\thanksmargin=\skip49
-\droptitle=\skip50
+\thanksmarkwidth=\skip49
+\thanksmargin=\skip50
+\droptitle=\skip51
 ) (/usr/local/texlive/2018/texmf-dist/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
-\labelindent=\skip51
-\enit@outerparindent=\dimen127
+\labelindent=\skip52
+\enit@outerparindent=\dimen131
 \enit@toks=\toks25
-\enit@inbox=\box28
-\enitdp@description=\count115
+\enit@inbox=\box29
+\enitdp@description=\count118
 ) (/usr/local/texlive/2018/texmf-dist/tex/latex/tools/array.sty
 Package: array 2018/04/07 v2.4g Tabular extension package (FMi)
-\col@sep=\dimen128
-\ar@mcellbox=\box29
-\extrarowheight=\dimen129
+\col@sep=\dimen132
+\ar@mcellbox=\box30
+\extrarowheight=\dimen133
 \NC@list=\toks26
-\extratabsurround=\skip52
-\backup@length=\skip53
-\ar@cellbox=\box30
+\extratabsurround=\skip53
+\backup@length=\skip54
+\ar@cellbox=\box31
 ) (/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/epsfig.sty
 Package: epsfig 2017/06/25 v1.7b (e)psfig emulation (SPQR)
-\epsfxsize=\dimen130
-\epsfysize=\dimen131
-) (/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/color.sty
-Package: color 2016/07/10 v1.1e Standard LaTeX Color (DPC)
-(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics-cfg/color.cfg
-File: color.cfg 2016/01/02 v1.6 sample color configuration
-)
-Package color Info: Driver file: pdftex.def on input line 147.
+\epsfxsize=\dimen134
+\epsfysize=\dimen135
 ) (/usr/local/texlive/2018/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
 (/usr/local/texlive/2018/texmf-dist/tex/latex/graphics-cfg/color.cfg
@@ -520,91 +538,139 @@ Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 ) (/usr/local/texlive/2018/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2016/11/25 v2.2 Span multiple rows of a table
-\multirow@colwidth=\skip54
-\multirow@cntb=\count116
-\multirow@dima=\skip55
-\bigstrutjot=\dimen132
+\multirow@colwidth=\skip55
+\multirow@cntb=\count119
+\multirow@dima=\skip56
+\bigstrutjot=\dimen136
 ) (/usr/local/texlive/2018/texmf-dist/tex/latex/setspace/setspace.sty
 Package: setspace 2011/12/19 v6.7a set line spacing
 ) (/usr/local/texlive/2018/texmf-dist/tex/latex/apacite/apacite.sty
 Package: apacite 2013/07/21 v6.03 APA citation
-\c@BibCnt=\count117
-\bibleftmargin=\skip56
-\bibindent=\skip57
-\bibparsep=\skip58
-\bibitemsep=\skip59
-\biblabelsep=\skip60
+\c@BibCnt=\count120
+\bibleftmargin=\skip57
+\bibindent=\skip58
+\bibparsep=\skip59
+\bibitemsep=\skip60
+\biblabelsep=\skip61
 ) (/usr/local/texlive/2018/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count118
-\lst@gtempboxa=\box31
+\lst@mode=\count121
+\lst@gtempboxa=\box32
 \lst@token=\toks27
-\lst@length=\count119
-\lst@currlwidth=\dimen133
-\lst@column=\count120
-\lst@pos=\count121
-\lst@lostspace=\dimen134
-\lst@width=\dimen135
-\lst@newlines=\count122
-\lst@lineno=\count123
-\lst@maxwidth=\dimen136
+\lst@length=\count122
+\lst@currlwidth=\dimen137
+\lst@column=\count123
+\lst@pos=\count124
+\lst@lostspace=\dimen138
+\lst@width=\dimen139
+\lst@newlines=\count125
+\lst@lineno=\count126
+\lst@maxwidth=\dimen140
 (/usr/local/texlive/2018/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-\c@lstnumber=\count124
-\lst@skipnumbers=\count125
-\lst@framebox=\box32
+\c@lstnumber=\count127
+\lst@skipnumbers=\count128
+\lst@framebox=\box33
 ) (/usr/local/texlive/2018/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2015/06/04 1.6 listings configuration
 ))
 Package: listings 2015/06/04 1.6 (Carsten Heinz)
 (/usr/local/texlive/2018/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count126
+\c@float@type=\count129
 \float@exts=\toks28
-\float@box=\box33
+\float@box=\box34
 \@float@everytoks=\toks29
-\@floatcapt=\box34
+\@floatcapt=\box35
 ) (/usr/local/texlive/2018/texmf-dist/tex/latex/makecell/makecell.sty
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
-\rotheadsize=\dimen137
-\c@nlinenum=\count127
+\rotheadsize=\dimen141
+\c@nlinenum=\count130
 \TeXr@lab=\toks30
+) (/usr/local/texlive/2018/texmf-dist/tex/latex/tools/multicol.sty
+Package: multicol 2018/04/01 v1.8r multicolumn formatting (FMi)
+\c@tracingmulticols=\count131
+\mult@box=\box36
+\multicol@leftmargin=\dimen142
+\c@unbalance=\count132
+\c@collectmore=\count133
+\doublecol@number=\count134
+\multicoltolerance=\count135
+\multicolpretolerance=\count136
+\full@width=\dimen143
+\page@free=\dimen144
+\premulticols=\dimen145
+\postmulticols=\dimen146
+\multicolsep=\skip62
+\multicolbaselineskip=\skip63
+\partial@page=\box37
+\last@line=\box38
+\maxbalancingoverflow=\dimen147
+\mult@rightbox=\box39
+\mult@grightbox=\box40
+\mult@gfirstbox=\box41
+\mult@firstbox=\box42
+\@tempa=\box43
+\@tempa=\box44
+\@tempa=\box45
+\@tempa=\box46
+\@tempa=\box47
+\@tempa=\box48
+\@tempa=\box49
+\@tempa=\box50
+\@tempa=\box51
+\@tempa=\box52
+\@tempa=\box53
+\@tempa=\box54
+\@tempa=\box55
+\@tempa=\box56
+\@tempa=\box57
+\@tempa=\box58
+\@tempa=\box59
+\c@columnbadness=\count137
+\c@finalcolumnbadness=\count138
+\last@try=\dimen148
+\multicolovershoot=\dimen149
+\multicolundershoot=\dimen150
+\mult@nat@firstbox=\box60
+\colbreak@box=\box61
+\mc@col@check@num=\count139
 ) (/usr/local/texlive/2018/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 ) (/usr/local/texlive/2018/texmf-dist/tex/latex/listings/lstlang2.sty
 File: lstlang2.sty 2015/06/04 1.6 listings language file
 ) (/usr/local/texlive/2018/texmf-dist/tex/latex/listings/lstlang3.sty
 File: lstlang3.sty 2015/06/04 1.6 listings language file
-) (./WriteUp.aux)
-\openout1 = `WriteUp.aux'.
+) (./FinalWriteUp.aux)
+\openout1 = `FinalWriteUp.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 118.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 118.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 159.
+LaTeX Font Info:    ... okay on input line 159.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 159.
+LaTeX Font Info:    ... okay on input line 159.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 159.
+LaTeX Font Info:    ... okay on input line 159.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 159.
+LaTeX Font Info:    ... okay on input line 159.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 159.
+LaTeX Font Info:    ... okay on input line 159.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 159.
+LaTeX Font Info:    ... okay on input line 159.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 159.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 159.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 118.
+LaTeX Font Info:    ... okay on input line 159.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 159.
+LaTeX Font Info:    ... okay on input line 159.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 159.
+LaTeX Font Info:    ... okay on input line 159.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 159.
 (/usr/local/texlive/2018/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Info: Redefining \microtypecontext on input line 118.
+LaTeX Info: Redefining \microtypecontext on input line 159.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
@@ -652,34 +718,34 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\AtBeginShipoutBox=\box35
-Package hyperref Info: Link coloring OFF on input line 118.
+\AtBeginShipoutBox=\box62
+Package hyperref Info: Link coloring OFF on input line 159.
 (/usr/local/texlive/2018/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count128
+\c@section@level=\count140
 )
-LaTeX Info: Redefining \ref on input line 118.
-LaTeX Info: Redefining \pageref on input line 118.
-LaTeX Info: Redefining \nameref on input line 118.
-(./WriteUp.out) (./WriteUp.out)
-\@outlinefile=\write3
-\openout3 = `WriteUp.out'.
+LaTeX Info: Redefining \ref on input line 159.
+LaTeX Info: Redefining \pageref on input line 159.
+LaTeX Info: Redefining \nameref on input line 159.
+(./FinalWriteUp.out) (./FinalWriteUp.out)
+\@outlinefile=\write4
+\openout4 = `FinalWriteUp.out'.
 
 (/usr/local/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count129
-\scratchdimen=\dimen138
-\scratchbox=\box36
-\nofMPsegments=\count130
-\nofMParguments=\count131
+\scratchcounter=\count141
+\scratchdimen=\dimen151
+\scratchbox=\box63
+\nofMPsegments=\count142
+\nofMParguments=\count143
 \everyMPshowfont=\toks31
-\MPscratchCnt=\count132
-\MPscratchDim=\dimen139
-\MPnumerator=\count133
-\makeMPintoPDFobject=\count134
+\MPscratchCnt=\count144
+\MPscratchDim=\dimen152
+\MPnumerator=\count145
+\makeMPintoPDFobject=\count146
 \everyMPtoPDFconversion=\toks32
 ) (/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -696,114 +762,516 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@maskedRefs=\count135
+\c@maskedRefs=\count147
 (/usr/local/texlive/2018/texmf-dist/tex/latex/apacite/english.apc
 File: english.apc 2013/07/21 v6.03 apacite language file
 LaTeX Info: Redefining \BPBI on input line 129.
 LaTeX Info: Redefining \BHBI on input line 130.
 )
-\c@lstlisting=\count136
-LaTeX Font Info:    Try loading font information for TS1+lmr on input line 166.
+\c@lstlisting=\count148
+LaTeX Font Info:    Try loading font information for TS1+lmr on input line 206.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [1
 
 {/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 213.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 253.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 213.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 253.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 213
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 253
 .
 (/usr/local/texlive/2018/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 213
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 253
 .
 (/usr/local/texlive/2018/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 213.
+(Font)              <10.95> on input line 253.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 213.
+(Font)              <8> on input line 253.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 213.
-LaTeX Font Info:    Try loading font information for U+msa on input line 213.
+(Font)              <6> on input line 253.
+LaTeX Font Info:    Try loading font information for U+msa on input line 253.
 (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/local/texlive/2018/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 213.
+LaTeX Font Info:    Try loading font information for U+msb on input line 253.
 (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/local/texlive/2018/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ) [2]
-<2019-12-04_05-08-06.jpeg, id=66, 641.39626pt x 223.83624pt>
-File: 2019-12-04_05-08-06.jpeg Graphic file (type jpg)
-<use 2019-12-04_05-08-06.jpeg>
-Package pdftex.def Info: 2019-12-04_05-08-06.jpeg  used on input line 336.
-(pdftex.def)             Requested size: 406.5285pt x 141.87144pt.
-<2019-12-04_05-25-17.jpeg, id=67, 722.7pt x 275.0275pt>
-File: 2019-12-04_05-25-17.jpeg Graphic file (type jpg)
-<use 2019-12-04_05-25-17.jpeg>
-Package pdftex.def Info: 2019-12-04_05-25-17.jpeg  used on input line 341.
-(pdftex.def)             Requested size: 406.51775pt x 154.70258pt.
+Overfull \hbox (23.53548pt too wide) in paragraph at lines 338--358
+[]  
+ []
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[3 <./2019-12-04_05-08-06.jpeg>] [4 <./2019-12-04_05-25-17.jpeg>]
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 392.
+Overfull \hbox (16.3287pt too wide) in paragraph at lines 388--399
+[] 
+ []
+
+[3]
+No file FinalWriteUp.bbl.
+[4]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 498.
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 507.
+
+<FinalWriteUp_files/figure-latex/unnamed-chunk-2-1.pdf, id=134, 422.57875pt x 2
+85.065pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type 
+pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-2-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-2-1.pdf 
+ used on input line 509.
+(pdftex.def)             Requested size: 422.57771pt x 285.0643pt.
+<FinalWriteUp_files/figure-latex/unnamed-chunk-3-1.pdf, id=135, 422.57875pt x 2
+85.065pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file (type 
+pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-3-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-3-1.pdf 
+ used on input line 514.
+(pdftex.def)             Requested size: 422.57771pt x 285.0643pt.
+[5 <./FinalWriteUp_files/figure-latex/unnamed-chunk-2-1.pdf>]
+<FinalWriteUp_files/figure-latex/unnamed-chunk-4-1.pdf, id=151, 453.695pt x 313
+.17pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-4-1.pdf Graphic file (type 
+pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-4-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-4-1.pdf 
+ used on input line 519.
+(pdftex.def)             Requested size: 453.6939pt x 313.16922pt.
+<FinalWriteUp_files/figure-latex/unnamed-chunk-5-1.pdf, id=152, 422.57875pt x 2
+86.06876pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type 
+pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-5-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-5-1.pdf 
+ used on input line 524.
+(pdftex.def)             Requested size: 422.58415pt x 286.07242pt.
+[6 <./FinalWriteUp_files/figure-latex/unnamed-chunk-3-1.pdf> <./FinalWriteUp_fi
+les/figure-latex/unnamed-chunk-4-1.pdf>]
+<FinalWriteUp_files/figure-latex/unnamed-chunk-6-1.pdf, id=179, 422.57875pt x 2
+86.06876pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-6-1.pdf Graphic file (type 
+pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-6-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-6-1.pdf 
+ used on input line 529.
+(pdftex.def)             Requested size: 422.58415pt x 286.07242pt.
+<FinalWriteUp_files/figure-latex/unnamed-chunk-7-1.pdf, id=180, 453.695pt x 315
+.1775pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-7-1.pdf Graphic file (type 
+pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-7-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-7-1.pdf 
+ used on input line 534.
+(pdftex.def)             Requested size: 453.6939pt x 315.17673pt.
+[7 <./FinalWriteUp_files/figure-latex/unnamed-chunk-5-1.pdf> <./FinalWriteUp_fi
+les/figure-latex/unnamed-chunk-6-1.pdf>]
+<FinalWriteUp_files/figure-latex/unnamed-chunk-8-1.pdf, id=204, 436.63126pt x 2
+50.9375pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type 
+pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-8-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-8-1.pdf 
+ used on input line 539.
+(pdftex.def)             Requested size: 436.63019pt x 250.93687pt.
+<FinalWriteUp_files/figure-latex/unnamed-chunk-9-1.pdf, id=205, 457.71pt x 316.
+18124pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-9-1.pdf Graphic file (type 
+pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-9-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-9-1.pdf 
+ used on input line 541.
+(pdftex.def)             Requested size: 457.72984pt x 316.19493pt.
+[8 <./FinalWriteUp_files/figure-latex/unnamed-chunk-7-1.pdf> <./FinalWriteUp_fi
+les/figure-latex/unnamed-chunk-8-1.pdf>]
+<FinalWriteUp_files/figure-latex/unnamed-chunk-10-1.pdf, id=229, 459.7175pt x 3
+13.17pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (type
+ pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-10-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-10-1.pdf
+  used on input line 543.
+(pdftex.def)             Requested size: 459.7304pt x 313.17877pt.
+<FinalWriteUp_files/figure-latex/unnamed-chunk-11-1.pdf, id=230, 436.63126pt x 
+250.9375pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-11-1.pdf Graphic file (type
+ pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-11-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-11-1.pdf
+  used on input line 548.
+(pdftex.def)             Requested size: 436.63019pt x 250.93687pt.
+[9 <./FinalWriteUp_files/figure-latex/unnamed-chunk-9-1.pdf> <./FinalWriteUp_fi
+les/figure-latex/unnamed-chunk-10-1.pdf>]
+<FinalWriteUp_files/figure-latex/unnamed-chunk-12-1.pdf, id=250, 457.71pt x 316
+.18124pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-12-1.pdf Graphic file (type
+ pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-12-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-12-1.pdf
+  used on input line 550.
+(pdftex.def)             Requested size: 457.72984pt x 316.19493pt.
+<FinalWriteUp_files/figure-latex/unnamed-chunk-13-1.pdf, id=251, 459.7175pt x 3
+13.17pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file (type
+ pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-13-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-13-1.pdf
+  used on input line 552.
+(pdftex.def)             Requested size: 459.7304pt x 313.17877pt.
+[10 <./FinalWriteUp_files/figure-latex/unnamed-chunk-11-1.pdf> <./FinalWriteUp_
+files/figure-latex/unnamed-chunk-12-1.pdf>]
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 557.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-No file WriteUp.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 428.
-[5]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 428.
-(./WriteUp.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 428.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 428.
-Package rerunfilecheck Info: File `WriteUp.out' has not changed.
-(rerunfilecheck)             Checksum: 35AF8987A00B927FE30D2C96C77826C9;786.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 428.
+<FinalWriteUp_files/figure-latex/unnamed-chunk-14-1.pdf, id=270, 436.63126pt x 
+283.0575pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (type
+ pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-14-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-14-1.pdf
+  used on input line 561.
+(pdftex.def)             Requested size: 436.63019pt x 283.0568pt.
+<FinalWriteUp_files/figure-latex/unnamed-chunk-15-1.pdf, id=271, 457.71pt x 316
+.18124pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-15-1.pdf Graphic file (type
+ pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-15-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-15-1.pdf
+  used on input line 563.
+(pdftex.def)             Requested size: 457.72984pt x 316.19493pt.
+[11 <./FinalWriteUp_files/figure-latex/unnamed-chunk-13-1.pdf> <./FinalWriteUp_
+files/figure-latex/unnamed-chunk-14-1.pdf>]
+<FinalWriteUp_files/figure-latex/unnamed-chunk-16-1.pdf, id=293, 459.7175pt x 3
+13.17pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-16-1.pdf Graphic file (type
+ pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-16-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-16-1.pdf
+  used on input line 565.
+(pdftex.def)             Requested size: 459.7304pt x 313.17877pt.
+<FinalWriteUp_files/figure-latex/unnamed-chunk-17-1.pdf, id=294, 436.63126pt x 
+283.0575pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-17-1.pdf Graphic file (type
+ pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-17-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-17-1.pdf
+  used on input line 570.
+(pdftex.def)             Requested size: 436.63019pt x 283.0568pt.
+[12 <./FinalWriteUp_files/figure-latex/unnamed-chunk-15-1.pdf> <./FinalWriteUp_
+files/figure-latex/unnamed-chunk-16-1.pdf>]
+<FinalWriteUp_files/figure-latex/unnamed-chunk-18-1.pdf, id=315, 457.71pt x 316
+.18124pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-18-1.pdf Graphic file (type
+ pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-18-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-18-1.pdf
+  used on input line 572.
+(pdftex.def)             Requested size: 457.72984pt x 316.19493pt.
+<FinalWriteUp_files/figure-latex/unnamed-chunk-19-1.pdf, id=316, 459.7175pt x 3
+13.17pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-19-1.pdf Graphic file (type
+ pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-19-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-19-1.pdf
+  used on input line 574.
+(pdftex.def)             Requested size: 459.7304pt x 313.17877pt.
+[13 <./FinalWriteUp_files/figure-latex/unnamed-chunk-17-1.pdf> <./FinalWriteUp_
+files/figure-latex/unnamed-chunk-18-1.pdf>]
+<FinalWriteUp_files/figure-latex/unnamed-chunk-20-1.pdf, id=337, 436.63126pt x 
+283.0575pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-20-1.pdf Graphic file (type
+ pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-20-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-20-1.pdf
+  used on input line 579.
+(pdftex.def)             Requested size: 436.63019pt x 283.0568pt.
+<FinalWriteUp_files/figure-latex/unnamed-chunk-21-1.pdf, id=338, 457.71pt x 316
+.18124pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-21-1.pdf Graphic file (type
+ pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-21-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-21-1.pdf
+  used on input line 581.
+(pdftex.def)             Requested size: 457.72984pt x 316.19493pt.
+[14 <./FinalWriteUp_files/figure-latex/unnamed-chunk-19-1.pdf> <./FinalWriteUp_
+files/figure-latex/unnamed-chunk-20-1.pdf>]
+<FinalWriteUp_files/figure-latex/unnamed-chunk-22-1.pdf, id=359, 459.7175pt x 3
+13.17pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-22-1.pdf Graphic file (type
+ pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-22-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-22-1.pdf
+  used on input line 583.
+(pdftex.def)             Requested size: 459.7304pt x 313.17877pt.
+<FinalWriteUp_files/figure-latex/unnamed-chunk-23-1.pdf, id=360, 436.63126pt x 
+283.0575pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-23-1.pdf Graphic file (type
+ pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-23-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-23-1.pdf
+  used on input line 588.
+(pdftex.def)             Requested size: 436.63019pt x 283.0568pt.
+[15 <./FinalWriteUp_files/figure-latex/unnamed-chunk-21-1.pdf> <./FinalWriteUp_
+files/figure-latex/unnamed-chunk-22-1.pdf>]
+<FinalWriteUp_files/figure-latex/unnamed-chunk-24-1.pdf, id=380, 457.71pt x 316
+.18124pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-24-1.pdf Graphic file (type
+ pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-24-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-24-1.pdf
+  used on input line 590.
+(pdftex.def)             Requested size: 457.72984pt x 316.19493pt.
+<FinalWriteUp_files/figure-latex/unnamed-chunk-25-1.pdf, id=381, 459.7175pt x 3
+13.17pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-25-1.pdf Graphic file (type
+ pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-25-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-25-1.pdf
+  used on input line 592.
+(pdftex.def)             Requested size: 459.7304pt x 313.17877pt.
+[16 <./FinalWriteUp_files/figure-latex/unnamed-chunk-23-1.pdf> <./FinalWriteUp_
+files/figure-latex/unnamed-chunk-24-1.pdf>]
+<FinalWriteUp_files/figure-latex/unnamed-chunk-26-1.pdf, id=401, 437.635pt x 25
+0.9375pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-26-1.pdf Graphic file (type
+ pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-26-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-26-1.pdf
+  used on input line 597.
+(pdftex.def)             Requested size: 437.6406pt x 250.94069pt.
+<FinalWriteUp_files/figure-latex/unnamed-chunk-27-1.pdf, id=402, 457.71pt x 316
+.18124pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-27-1.pdf Graphic file (type
+ pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-27-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-27-1.pdf
+  used on input line 599.
+(pdftex.def)             Requested size: 457.72984pt x 316.19493pt.
+[17 <./FinalWriteUp_files/figure-latex/unnamed-chunk-25-1.pdf> <./FinalWriteUp_
+files/figure-latex/unnamed-chunk-26-1.pdf>]
+<FinalWriteUp_files/figure-latex/unnamed-chunk-28-1.pdf, id=422, 459.7175pt x 3
+13.17pt>
+File: FinalWriteUp_files/figure-latex/unnamed-chunk-28-1.pdf Graphic file (type
+ pdf)
+<use FinalWriteUp_files/figure-latex/unnamed-chunk-28-1.pdf>
+Package pdftex.def Info: FinalWriteUp_files/figure-latex/unnamed-chunk-28-1.pdf
+  used on input line 601.
+(pdftex.def)             Requested size: 459.7304pt x 313.17877pt.
+[18 <./FinalWriteUp_files/figure-latex/unnamed-chunk-27-1.pdf> <./FinalWriteUp_
+files/figure-latex/unnamed-chunk-28-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 622.
+
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 635.
+LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 765
+.
+(/usr/local/texlive/2018/texmf-dist/tex/latex/lm/ts1lmtt.fd
+File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+[19]
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+
+Underfull \vbox (badness 10000) detected at line 1064
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1064
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+[20]
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+
+Underfull \vbox (badness 10000) detected at line 1064
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1064
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+[21]
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+
+Underfull \vbox (badness 10000) detected at line 1064
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1064
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+[22]
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+
+Underfull \vbox (badness 10000) detected at line 1064
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1064
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+[23]
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+
+Underfull \vbox (badness 10000) detected at line 1064
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1064
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+[24]
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+
+Underfull \vbox (badness 10000) detected at line 1064
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1064
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+[25]
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+
+Underfull \vbox (badness 10000) detected at line 1064
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1064
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+[26]
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1064.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1095.
+[27]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1095.
+(./FinalWriteUp.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1095.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1095.
+
+Package rerunfilecheck Info: File `FinalWriteUp.out' has not changed.
+(rerunfilecheck)             Checksum: 5A3FBD0C97A78497B67AA8E5B4B8ADCB;2157.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1095.
  ) 
 Here is how much of TeX's memory you used:
- 14908 strings out of 492649
- 216740 string characters out of 6129622
- 370991 words of memory out of 5000000
- 18487 multiletter control sequences out of 15000+600000
- 33793 words of font info for 66 fonts, out of 8000000 for 9000
+ 15730 strings out of 492649
+ 234187 string characters out of 6129622
+ 412556 words of memory out of 5000000
+ 19218 multiletter control sequences out of 15000+600000
+ 48598 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 32i,16n,40p,302b,445s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 32i,16n,40p,324b,445s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/
-texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/local/texlive/20
-18/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2018/texmf-d
-ist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2018/texmf-dist/fonts/enc/
-dvips/lm/lm-mathit.enc}{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/lm/l
-m-ts1.enc}</usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmbx12.pfb>
-</usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/loca
-l/texlive/2018/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/
-2018/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2018/texmf-
-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/
-type1/public/lm/lmr8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public
-/lm/lmri10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmsy10
-.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/
-local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on WriteUp.pdf (5 pages, 293398 bytes).
+texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local/texlive/2018/
+texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/local/texlive/2018/texmf-dist
+/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2018/texmf-dist/fonts/enc
+/dvips/lm/lm-rm.enc}{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-m
+athit.enc}</usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmbx10.pfb>
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/loca
+l/texlive/2018/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/
+2018/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2018/texmf
+-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2018/texmf-dist/fonts
+/type1/public/lm/lmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/publ
+ic/lm/lmr8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmri10
+.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr
+/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texl
+ive/2018/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive/2018/t
+exmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2018/texmf-dist/
+fonts/type1/public/lm/lmtti10.pfb>
+Output written on FinalWriteUp.pdf (27 pages, 1798135 bytes).
 PDF statistics:
- 148 PDF objects out of 1000 (max. 8388607)
- 127 compressed objects within 2 object streams
- 35 named destinations out of 1000 (max. 500000)
- 6219 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 571 PDF objects out of 1000 (max. 8388607)
+ 443 compressed objects within 5 object streams
+ 86 named destinations out of 1000 (max. 500000)
+ 10552 words of extra memory for PDF output out of 12000 (max. 10000000)
 

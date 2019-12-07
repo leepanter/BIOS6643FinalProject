@@ -1,5 +1,4 @@
 ---
-title: "Appendix"
 fontsize: 11pt
 output:
   pdf_document:
@@ -7,6 +6,7 @@ output:
     includes:
       in_header: Rmarkdown_preamble.tex
 geometry: margin=0.5in
+bibliography: FinalProjBib.bib
 ---
 
 <!------------------------------------------------------------------------------>
@@ -18,9 +18,230 @@ geometry: margin=0.5in
 knitr::opts_chunk$set(echo=FALSE, 
                       cache = TRUE, 
                       fig.align = "center",
-                      fig.width = 2.5,
-                      fig.height = 2.5)
+                      fig.width = 5)
 ```
+
+\newpage
+
+# Introduction
+
+The discovery of DNA, RNA, and the development of genomic sequencing methods has proven to be a valuable tool of scientific research.  However, the methods developed in the first-generation of technology relied on “bulk” sampling, which could only estimate population-average expression of RNA and DNA.  In order to obtain a more complete understanding of how the cellular landscape functions, estimates of cell-to-cell variability need to be estimated.  Development of single-cell RNA sequencing (scRNAseq) technology has increased to satisfy this need, but a need for statistical analysis is still outstanding since previous methods used to model bulk RNA sequencing data do not account for the correlated nature of scRNAseq data.    
+
+This paper will compare seven different modeling approaches on an observational scRNAseq data set obtained from a Lupus Nephritis Case/Control Study involving 33 patients across the United States. [@arazi2018immune]  Two RNA genes were selected to be the predictor-response pair to simplify the modeling process.  The main goal of this report is to investigate the ways in which parameter estimates vary as the modeling methodology is altered.  It is hoped that the results of this investigation are useful for the development of models involving scRNAseq data in the future.
+
+# Data
+
+A single-cell RNA sequencing (scRNAseq) expression profile is a matrix of count-values representing a “snapshot” of the magnitude of activity of genomic features of a single cell.  [@Geneexpr23:online] In its original form, the data being studied here has a data matrix that contained 9,560 single-cell observations clustered within 27 subject-samples (5 control not included in data).  Each observation contained the expression of 38,354 genetic features.  
+
+Single-Cell data is often unreliable, protocol dependent, and can often have batch effects.  Data quality control (QC) filters out redundant measures, and dead cell observations.  The Seurat Guided Clustering \& Quality Control Tutorial [@satija2018seurat] was used to perform quality control, using the parameter values: 
+\begin{itemize}
+  \item Percent Mitochondrial DNA > 60\%
+  \item Genetic Features Expressed < 1,000
+  \item Genetic Features Expressed > 5,000
+  \item B-cells only
+\end{itemize}
+
+These quality control measures reduced the original data by 88%, leaving only 1,110 observations clustered within 15 subjects. Two genes (MALAT1 and CD19) were then selected from the set of genetic features in the initial data to be studied due to a higher correlation.  MALAT1 has been linked with cancer metastasis, cell migration, and cell regulation. [@MALAT1Ge80:online] CD19 encodes a cell surface molecule which regulates lymphocyte proliferation and differentiation.  [@CD19Gene32:online]. 
+
+Histograms and a joint distribution scatter plot were constructed to visualize the distributions of the selected variables (Appendix: Fig1-Fig3).  The presence of zeros in the data indicated that the distribution might be well suited for a zero-inflated mixture model.  Specifically, since the response is count-valued, the histograms indicated that a zero-inflated Poisson Generalized Linear Model or Generalized Linear Mixed Model would be appropriate.  Additionally, while normality was not expected, log-transformations were also applied (Appendix: fig4-fig6), and resulted in approximate normality of the response MALAT1 and a bimodal distribution of the predictor CD19.  
+
+# Methods
+
+The seven different modeling methodologies explored in this investigation are:
+\begin{enumerate}
+  \item Linear Models with Fixed Effects (LMwFE)
+  \item Linear Mixed Models with Random Effects (LMMwRE)
+  \item Poisson Generalized Linear Models without overdispersion (POI)
+  \item Poisson quasi-likelihood Generalized Linear Models with over dispersion (POIql)
+  \item Poisson Generalized Linear Mixed Models fit using Penalized Quasi-Likelihood (POIlmm)
+  \item Zero-Inflated Poisson Generalized Linear Mixed Model -- Fixed Effect Subject (ZIPfe)
+  \item Zero-Inflated Poisson Generalized Linear Mixed Model -- Random Effect Subject (ZIPre)
+\end{enumerate}
+Models (1) and (2) are fit on log-transformed data (predictor and response), the remaining models are fit on untransformed data.
+
+We assume that repeated measure residual errors are independent (when applicable), i.e for subject $i = 1, \ldots, 15$ and repeated measure $j = 1. \ldots, n_{i}$
+$$\epsilon_{ij} \sim N(0, \sigma_{\epsilon}^{2})$$
+In an attempt to gain insight into the processes governing cellular relationships with their host subjects, a subject parameter was also fit using either a fixed or a random effect.  
+
+$$Fixed \ Effect: \quad \beta_{0i}$$
+$$Random \ Effect: \quad b_{0i}$$
+where:
+$$b_{0i}\sim N(0, \sigma_{b}^{2})$$
+A fixed effect, global intercept and a covariate (CD19) parameter are included in all models, these parameter estimates (along with their standard errors) will be the primary focus for comparing the modeling methods.
+
+We let:
+$$\gamma_{ij}=\beta_{0}+\beta_{1} \ CD19$$
+and unless otherwise stated, in situations where a model calls for a link function, the canonical link function for count data will be used:
+$$\mu_{ij}=g^{-1}(\eta_{ij})=log(\eta_{ij})$$
+Zero-Inflated models will use a fixed effect intensity model with only an intercept
+$$R_{ij} \sim bernoulli(p_{ij}) \quad p(R_{ij}=1)=\alpha_{0}$$
+the intensity model parameters will be varied using a fixed or random effect for subject.  This terminology allows the models to be written as: 
+\begin{center}
+\renewcommand{\arraystretch}{1.75}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Model \# & Model Name  & Model Format & Assumed Data Distribution\\
+\hline
+\hline
+  1  &  LMwFE   &  $Y_{ij}=\beta_{0i}+\gamma_{ij}+\epsilon_{ij}$ & $Y_{ij}\sim N\left(\beta_{0i}+E\left [\  \gamma_{ij}  \right ], \sigma_{\epsilon}^{2}   \right) $ \\
+\hline
+  2  &  LMMwRE  &  $Y_{ij}=\gamma_{ij}+b_{0i}++\epsilon_{ij}$ & $ E\left [Y_{ij}|b_{0i}    \right ] \sim N\left(E\left [\  \gamma_{ij} + b_{0i}+  \right ], \sigma_{\epsilon}^{2}   \right) $  \\
+\hline
+  3  &  POI     &  $\mu_{ij}=g^{-1}\left(\eta_{ij}= \beta_{0i}+\gamma_{ij} \right) $ & $Y_{ij} \sim Poisson\left(\beta_{0i}+E\left [\  \gamma_{ij}  \right ]  \right)  $  \\
+\hline
+  4  &  POIql   &  $\mu_{ij}=g^{-1}\left(\eta_{ij}= \beta_{0i}+\gamma_{ij} \right) $ & $Y_{ij} \sim Poisson\left(\phi \left(\beta_{0i}+E\left [\  \gamma_{ij}  \right ]   \right)    \right)  $ \\
+\hline
+  5  &  POIlmm  &  $\mu_{ij}=g^{-1}\left(\eta_{ij}= \gamma_{ij}+b_{0i} \right) $ & $E\left [  Y_{ij} | b_{0i}  \right ] \sim Poisson\left(E\left [\  \gamma_{ij}  \right ] +b_{0i} \right)$   \\
+\hline
+  6  &  ZIPfe  & \makecell{$R_{ij} \sim bernoulli(p_{ij})$ \\ $\mu_{ij} | (r_{ij}=1)=g\left(\eta_{ij}= \beta_{0i}+\gamma_{ij}  \right) $}   & $Y_{ij} \sim ZerInfPoi\left(\beta_{0i}+E\left [\  \gamma_{ij}  \right ]      , p_{ij}\right)  $ \\
+\hline
+  7  &  ZIPre  &  \makecell{$R_{ij} \sim bernoulli(p_{ij} )$ \\ $\mu_{ij} | (r_{ij}=1)=g\left(\eta_{ij}= \gamma_{ij}+b_{0i}  \right) $}  & $E\left [  Y_{ij} | b_{0i}  \right ] \sim ZerInfPoi\left(E\left [\  \gamma_{ij}  \right ] + b_{0i} , p_{ij}  \right)  $ \\
+\hline
+\end{tabular}
+\end{center}
+
+# Results
+
+\begin{multicols}{2}
+
+\begin{center}
+\textbf{\underline{Intercept Estimates}}
+\end{center}
+
+\begin{flushright}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Model & Estimate & Std. Error & pvalue \\
+\hline
+\hline
+LMwFE & 8.3464 & $4.981*10^{-2}$ &  $<2*10^{-16}$ \\
+\hline
+LMMwRE & 8.3479 & $1.3565*10^{-1}$ & $<2*10^{-16}$ \\
+\hline
+POI & 8.821 & $4.856*10^{-4}$ & $<2*10^{-16}$ \\
+\hline
+POIql & 8.957 & $3.007*10^{-2}$ & $<2*10^{-16}$  \\
+\hline
+POIlmm & 8.8362 & $1.0163*10^{-1}$ & $<1*10^{-5}$ \\
+\hline
+ZIPfe & 8.958 & $3.689*10^{-4}$ & $<2*10^{-16}$ \\
+\hline
+ZIPre & 8.9402 & $6.5229*10^{-4}$ & $<1*10^{-4}$ \\
+\hline
+\end{tabular}
+\end{flushright}
+
+\columnbreak
+
+\begin{center}
+\textbf{\underline{Slope Estimates}}
+\end{center}
+
+\begin{flushleft}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Model & Estimate & Std. Error & pvalue \\
+\hline
+\hline
+LMwFE & $5.590*10^{-2}$  & $1.534*10^{-2}$ &  $2.82*10^{-4}$ \\
+\hline
+LMMwRE & $5.703*10^{-2}$ & $1.528*10^{-1}$ & $1.8935*10^{-4}$ \\
+\hline
+POI & $3.246*10^{-4}$    & $2.513*10^{-6}$ & $<2*10^{-16}$ \\
+\hline
+POIql &  $8.839*10^{-5}$  & $1.913*10^{-4}$ & $0.644$  \\
+\hline
+POIlmm &  $3.16*10^{-4}$  & $1.6525*10^{-4}$ & $5.61*10^{-2}$ \\
+\hline
+ZIPfe &  $8.559*10^{-5}$  & $2.176*10^{-6}$ & $<2*10^{-16}$ \\
+\hline
+ZIPre &  $2.9282*10^{-4}$ & $2.1289*10^{-6}$ & $1*10^{-4}$ \\
+\hline
+\end{tabular}
+\end{flushleft}
+
+\end{multicols}
+
+\begin{multicols}{2}
+\begin{center}
+\textbf{\underline{Intercept Estimate Percent Change}}
+\end{center}
+
+\begin{flushright}
+\begin{tabular}{c|ccccccc|}
+ & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+\hline
+1 & 0      & 0.00  & -0.06  & -0.06  & -0.06 & -0.06 & -0.07 \\
+2 & 0.00  & 0      & -0.06  & -0.06  & -0.06 & -0.06 & -0.07 \\
+3 & 0.05  & 0.05  & 0       & 0.00    & -0.00 & 0.00  & -0.01 \\
+4 & 0.05  & 0.05  & 0.00   & 0       & -0.00 & 0.00  & -0.01 \\
+5 & 0.06  & 0.06  & 0.00   & 0.00   & 0      & 0.00  & -0.01 \\
+6 & 0.05  & 0.05  & 0.00   & 0.00   & -0.00 & 0      & -0.01 \\
+7 & 0.07  & 0.07  & 0.01   & 0.01   & 0.01  & 0.01  & 0      \\
+\end{tabular}
+
+\end{flushright}
+
+
+
+\columnbreak
+\begin{center}
+\textbf{\underline{Slope Estimate Percent Change}}
+\end{center}
+\begin{tabular}{c|ccccccc|}
+ & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+\hline
+1 & 0        & -0.02    & 0.99    & 0.99    & 0.99   & 0.99   & 1.00 \\
+2 & 0.020    &  0       & 0.99    & 0.99    & 0.99   & 0.99   & 1.00 \\
+3 & -171.23  & -174.72  & 0        & 0.00    & 0.03   & 0.01   & 0.10 \\
+4 & -171.23  & -174.72  & 0.00    & 0        & 0.03   & 0.01   & 0.10 \\
+5 & -175.85  & -179.44  & -0.03   & -0.03   & 0       & -0.02  & 0.07 \\
+6 & -172.59  & -176.10  & -0.01   & -0.01   & 0.02   & 0       & 0.09 \\
+7 & -189.89  & -193.76  & -0.11   & -0.11   & -0.08  & -0.10   & 0      \\
+\end{tabular}
+\end{multicols}
+
+Where the numerical model-mapping 
+$$model \ name \mapsto \left \{  1, 2, \ldots, 7 \right \}$$ 
+is given in the model definition table above.
+
+
+# Discussion
+
+The results have shown that changes in modeling strategy have little impact on the estimate of the intercept parameter. This is supported by the fact that the maximum absolute difference between estimates for the intercept is a 7% change. This consistency also supports a stronger conlcusion that: parameter estimates for intercept agree in both sign and magnitude for all models.  
+
+These statements are not true for covariate parameter estimates.  While these values are comparable within similar model frameworks, the estimates agree on only sign across all models. This is not an unexpected result, since parameter estimates for slopes are heavily dependent on how observations are corelated, and this concept is approached differently in all of the models employed.
+
+It should be noted that, while the estimates for the slope parameters have been estimated to be "significant", the magnitude of these parameter estimates deviates very little from 0.  Given this information, it would not be unreasonable to conclude that the effect of CD19 can be almost completely ignored.  Nested model comparisons were performed to test for the significance of the CD19 covariate.  It was found that there was sufficient evidence to include the covariate when compared to the "null" model in most situations involving log-transformed variables, and when the subject term had already been included as a Fixed Effect.  
+
+The standard errors of both parameter estimates (intercept and slope) indicate a trend of increased uncertainty in parameter estimates as methodologies move from incorperating subject as a fixed effect, to incorperating it as a random effect.  While this result was not initially expected, it is plausible in light of the nested model comparison results, and would indicate that the subject effect is likely correlated with CD19.  This implies that the random effect assumption: "unobserved...[individual/subject] heterogeneity is uncorrelated with idependent variables" [@wooldridge2010econometric] is likely violated.     
+
+
+# Limitations and Future Research
+
+Initial quality control measures for the scRNAseq data found an extremely high presence of mitochondrial RNA (mRNA).  Mitochondrial functionality is essential to cellular processeses, upon death such functions cease, and mitochondria degrade.  As a result, mRNA content is used as a quality control measure to indicate progression of cellular death.  The Seurat tutorial for single-cell analysis recommended filter parameters of \%mRNA  < \%5; however this threshold elimated \underline{all} data when used in conjunction with the other recommended quality control measures.  A final determination of %mRNA < %60 was used to preserve as much of the clustering-structure as possible, with the trade-off of analyzing dead cells.  Even after altering the QC thresholds to allow for more data, observational imbalance between subjects was observed, and remained mostly unaccounted-for throughout the analysis.  
+
+The results of this investigation are based upon mostly non-living biological samples.  While interpretation of model parameters is certainly possible, the individual estimates are less meaningful considering the contex than the estimate trends that we are seeking.  The sign of the estimates for the slope parameter, which would be the most contextually illuminating (as there were no control-subjects in the data), demonstrate that increased values of CD19 are marginally (if at all) associated with higher values of MALAT1.  However, as previously indicated, the magnitude of these estimates reinforce interpretational futility.   
+
+The analysis conducted in this investigation is inadequate and inaccurate.  The analysis conducted here is inaccurate because of biologically poor quality data, and imbalance between subject information.  Additionally, the model estimates being compared can not be used for inference on the source of estimate variances because of multi-factor changes across each estimate (model fitting technique, linear predictor changes, data transformation differences). The results of this investigation are inadequate because the original goal of the investigation was to investigate models over single-cell data and isolate the specific effects that the modeling strategies have over parameter estimates.  Since only vauge conlcusions regarding slope and intercept were obtained, this investigation has fallen short of its objective.  
+
+Consequently, the future of research for this project is very broad in scope.  Immediate considerations will be made to compare more simplistic modeling strategies over more similar models.  
+
+# References
+\bibliography{FinalProjBib.bib}
+
+
+
+\newpage
+\begin{center}
+\large{\underline{\textbf{APPENDIX:}}}
+\end{center}
+
+
+
+
+\vspace{5pt}
+
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
@@ -412,7 +633,6 @@ q=ggplot(dat, aes(sample = resid))+
 q
 ```
 
-\newpage
 
 
 # Code
@@ -868,3 +1088,23 @@ SlopeVec=c(slope.LMwFE,
 
 #-------------------------------------------------------------------------#
 ```
+
+<!------------------------------------------------------------------------------>
+<!-- End Script -->       
+<!------------------------------------------------------------------------------>
+
+
+<!------------------------------------------------------------------------------>
+<!-- Post-Script -->       
+<!------------------------------------------------------------------------------>
+
+<!-- Notes:        -->       
+
+<!-- Compilation Errors -->       
+
+<!-- Execution Errors -->
+
+<!-- Next Scripts to Consider -->
+
+<!------------------------------------------------------------------------------>
+
